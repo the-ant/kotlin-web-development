@@ -1,5 +1,9 @@
 import component.videoList
 import component.videoPlayer
+import kotlinx.browser.window
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.await
+import kotlinx.coroutines.launch
 import model.Video
 import react.*
 import react.dom.div
@@ -23,6 +27,12 @@ class App : RComponent<RProps, AppState>() {
         watchedVideos = listOf(
                 Video(4, "Mouseless development", "Tom Jerry", "https://youtu.be/PsaFVLr8t4E")
         )
+
+        val mainScope = MainScope()
+        mainScope.launch {
+            val greeting = fetGreeting()
+            console.log(greeting)
+        }
     }
 
     override fun RBuilder.render() {
@@ -78,4 +88,14 @@ class App : RComponent<RProps, AppState>() {
         }
     }
 
+    suspend fun fetGreeting(): User {
+        return window.fetch("http://192.168.16.44:8081/")
+                .await()
+                .json()
+                .await()
+                .unsafeCast<User>()
+    }
+
 }
+
+data class User(val id: Int, val userName: String, val displayName: String)
