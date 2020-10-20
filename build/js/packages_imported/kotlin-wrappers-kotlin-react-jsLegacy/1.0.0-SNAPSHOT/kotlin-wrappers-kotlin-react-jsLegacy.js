@@ -1,4 +1,20 @@
-(function (_, Kotlin, $module$react, $module$kotlin_wrappers_kotlin_extensions_jsLegacy, $module$kotlinx_coroutines_core) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin', 'react', 'kotlin-wrappers-kotlin-extensions-jsLegacy', 'kotlinx-coroutines-core'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'), require('react'), require('kotlin-wrappers-kotlin-extensions-jsLegacy'), require('kotlinx-coroutines-core'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof react === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'react' was not found. Please, check whether 'react' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof this['kotlin-wrappers-kotlin-extensions-jsLegacy'] === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlin-wrappers-kotlin-extensions-jsLegacy' was not found. Please, check whether 'kotlin-wrappers-kotlin-extensions-jsLegacy' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }root['kotlin-wrappers-kotlin-react-jsLegacy'] = factory(typeof this['kotlin-wrappers-kotlin-react-jsLegacy'] === 'undefined' ? {} : this['kotlin-wrappers-kotlin-react-jsLegacy'], kotlin, react, this['kotlin-wrappers-kotlin-extensions-jsLegacy'], this['kotlinx-coroutines-core']);
+  }
+}(this, function (_, Kotlin, $module$react, $module$kotlin_wrappers_kotlin_extensions_jsLegacy, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Unit = Kotlin.kotlin.Unit;
@@ -314,8 +330,13 @@
       return buildElements(functionalComponent$lambda$lambda(closure$func, props));
     };
   }
-  function functionalComponent(func) {
-    return functionalComponent$lambda(func);
+  function functionalComponent(displayName, func) {
+    if (displayName === void 0)
+      displayName = null;
+    var fc = functionalComponent$lambda(func);
+    if (displayName != null) {
+      fc.displayName = displayName;
+    }return fc;
   }
   function child$lambda($receiver) {
     return Unit;
@@ -352,19 +373,14 @@
     handler($receiver_0);
     return $receiver.child_k3oess$(component, $receiver_0.attrs, listOf(childFunction$lambda_1(children)));
   }
-  function isString($receiver) {
-    return typeof $receiver === 'string';
-  }
   function asStringOrNull($receiver) {
-    if (isString($receiver))
-      return $receiver;
-    else
-      return null;
+    var tmp$;
+    return typeof (tmp$ = $receiver) === 'string' ? tmp$ : null;
   }
   function asElementOrNull($receiver) {
-    if (asJsObject($receiver).hasOwnProperty('$$typeof'))
+    if (asJsObject($receiver).hasOwnProperty('$$typeof')) {
       return $receiver;
-    else
+    } else
       return null;
   }
   function forEachElement$lambda(closure$handler) {
@@ -566,26 +582,22 @@
   function setState($receiver, buildState) {
     $receiver.setState(setState$lambda(buildState));
   }
-  var rFunction = defineInlineFunction('kotlin-wrappers-kotlin-react-jsLegacy.react.rFunction_9cac72$', wrapFunction(function () {
-    var Unit = Kotlin.kotlin.Unit;
-    var buildElements = _.react.buildElements_zepujl$;
-    function rFunction$lambda$lambda(closure$render, closure$props) {
-      return function ($receiver) {
-        closure$render($receiver, closure$props);
-        return Unit;
-      };
-    }
-    function rFunction$lambda(closure$render) {
-      return function (props) {
-        return buildElements(rFunction$lambda$lambda(closure$render, props));
-      };
-    }
-    return function (displayName, render) {
-      var fn = rFunction$lambda(render);
-      fn.displayName = displayName;
-      return fn;
+  function rFunction$lambda$lambda(closure$render, closure$props) {
+    return function ($receiver) {
+      closure$render($receiver, closure$props);
+      return Unit;
     };
-  }));
+  }
+  function rFunction$lambda(closure$render) {
+    return function (props) {
+      return buildElements(rFunction$lambda$lambda(closure$render, props));
+    };
+  }
+  function rFunction(displayName, render) {
+    var fn = rFunction$lambda(render);
+    fn.displayName = displayName;
+    return fn;
+  }
   function RComponent() {
   }
   RComponent.prototype.init_bc6fkx$ = function ($receiver) {
@@ -797,11 +809,10 @@
   package$react.buildElement_zepujl$ = buildElement;
   package$react.RElementBuilder = RElementBuilder;
   package$react.forwardRef_qtknwg$ = forwardRef;
-  package$react.functionalComponent_1klik0$ = functionalComponent;
+  package$react.functionalComponent_7g4vsr$ = functionalComponent;
   package$react.child_9r8yuv$ = child;
   package$react.childFunction_s7qziv$ = childFunction;
   package$react.childFunction_vp99ke$ = childFunction_0;
-  package$react.isString_84gpoi$ = isString;
   package$react.asStringOrNull_84gpoi$ = asStringOrNull;
   package$react.asElementOrNull_84gpoi$ = asElementOrNull;
   package$react.forEachElement_t3nwxq$ = forEachElement;
@@ -842,4 +853,4 @@
   package$react.useLayoutEffect_wrbdb4$ = useLayoutEffect;
   Kotlin.defineModule('kotlin-wrappers-kotlin-react-jsLegacy', _);
   return _;
-}(module.exports, require('kotlin'), require('react'), require('kotlin-wrappers-kotlin-extensions-jsLegacy'), require('kotlinx-coroutines-core')));
+}));

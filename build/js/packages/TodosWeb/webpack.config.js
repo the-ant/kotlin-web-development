@@ -1,5 +1,5 @@
 let config = {
-  mode: 'production',
+  mode: 'development',
   resolve: {
     modules: [
       "node_modules"
@@ -13,7 +13,7 @@ let config = {
 
 // entry
 config.entry = {
-    main: ["/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce/TodosWeb.js"]
+    main: ["/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce-dev/TodosWeb.js"]
 };
 
 config.output = {
@@ -28,7 +28,7 @@ config.output = {
 };
 
 // resolve modules
-config.resolve.modules.unshift("/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce")
+config.resolve.modules.unshift("/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce-dev")
 
 // source maps
 config.module.rules.push({
@@ -36,11 +36,23 @@ config.module.rules.push({
         use: ["source-map-loader"],
         enforce: "pre"
 });
-config.devtool = 'source-map';
+config.devtool = 'eval-source-map';
 config.stats = config.stats || {}
 Object.assign(config.stats, config.stats, {
     warningsFilter: [/Failed to parse source map/]
 })
+
+// dev server
+config.devServer = {
+  "inline": true,
+  "lazy": false,
+  "noInfo": true,
+  "open": true,
+  "overlay": false,
+  "contentBase": [
+    "/Users/theant/kotlin-web-development/build/processedResources/js/main"
+  ]
+};
 
 // Report progress to console
 // noinspection JSUnnecessarySemicolon

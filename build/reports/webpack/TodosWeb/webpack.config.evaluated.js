@@ -1,8 +1,8 @@
 {
-  mode: 'production',
+  mode: 'development',
   resolve: {
     modules: [
-      '/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce',
+      '/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce-dev',
       'node_modules'
     ]
   },
@@ -43,7 +43,7 @@
   },
   entry: {
     main: [
-      '/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce/TodosWeb.js'
+      '/Users/theant/kotlin-web-development/build/js/packages/TodosWeb/kotlin-dce-dev/TodosWeb.js'
     ]
   },
   output: {
@@ -52,12 +52,22 @@
     library: 'TodosWeb',
     libraryTarget: 'umd'
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   stats: {
     warningsFilter: [
       /Failed to parse source map/
     ],
     warnings: false,
     errors: false
+  },
+  devServer: {
+    inline: true,
+    lazy: false,
+    noInfo: true,
+    open: true,
+    overlay: false,
+    contentBase: [
+      '/Users/theant/kotlin-web-development/build/processedResources/js/main'
+    ]
   }
 }

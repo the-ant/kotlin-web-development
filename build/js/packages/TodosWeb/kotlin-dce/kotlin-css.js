@@ -58,16 +58,28 @@
   CSSBuilder.prototype.constructor = CSSBuilder;
   LinearDimension.prototype = Object.create(CssValue.prototype);
   LinearDimension.prototype.constructor = LinearDimension;
+  Align.prototype = Object.create(Enum.prototype);
+  Align.prototype.constructor = Align;
+  JustifyContent.prototype = Object.create(Enum.prototype);
+  JustifyContent.prototype.constructor = JustifyContent;
+  BorderStyle.prototype = Object.create(Enum.prototype);
+  BorderStyle.prototype.constructor = BorderStyle;
   Color.prototype = Object.create(CssValue.prototype);
   Color.prototype.constructor = Color;
   QuotedString.prototype = Object.create(CssValue.prototype);
   QuotedString.prototype.constructor = QuotedString;
   Display.prototype = Object.create(Enum.prototype);
   Display.prototype.constructor = Display;
-  Position.prototype = Object.create(Enum.prototype);
-  Position.prototype.constructor = Position;
-  TextAlign.prototype = Object.create(Enum.prototype);
-  TextAlign.prototype.constructor = TextAlign;
+  FontWeight.prototype = Object.create(CssValue.prototype);
+  FontWeight.prototype.constructor = FontWeight;
+  FlexDirection.prototype = Object.create(Enum.prototype);
+  FlexDirection.prototype.constructor = FlexDirection;
+  ListStyleType.prototype = Object.create(Enum.prototype);
+  ListStyleType.prototype.constructor = ListStyleType;
+  ObjectFit.prototype = Object.create(Enum.prototype);
+  ObjectFit.prototype.constructor = ObjectFit;
+  Overflow.prototype = Object.create(Enum.prototype);
+  Overflow.prototype.constructor = Overflow;
   Animations.prototype = Object.create(StyleList.prototype);
   Animations.prototype.constructor = Animations;
   BoxShadows.prototype = Object.create(StyleList.prototype);
@@ -527,6 +539,9 @@
   function value(number, unit) {
     return equals(number, 0) ? ZERO : number.toString() + unit;
   }
+  function get_pct($receiver) {
+    return new LinearDimension(value($receiver, '%'));
+  }
   function get_px($receiver) {
     return new LinearDimension(value($receiver, 'px'));
   }
@@ -540,34 +555,276 @@
     return this.value;
   };
   CssValue.$metadata$ = {kind: Kind_CLASS, simpleName: 'CssValue', interfaces: []};
+  function Align(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function Align_initFields() {
+    Align_initFields = function () {
+    };
+    Align$initial_instance = new Align('initial', 0);
+    Align$inherit_instance = new Align('inherit', 1);
+    Align$unset_instance = new Align('unset', 2);
+    Align$auto_instance = new Align('auto', 3);
+    Align$stretch_instance = new Align('stretch', 4);
+    Align$center_instance = new Align('center', 5);
+    Align$flexStart_instance = new Align('flexStart', 6);
+    Align$flexEnd_instance = new Align('flexEnd', 7);
+    Align$baseline_instance = new Align('baseline', 8);
+  }
   var Align$initial_instance;
+  function Align$initial_getInstance() {
+    Align_initFields();
+    return Align$initial_instance;
+  }
   var Align$inherit_instance;
+  function Align$inherit_getInstance() {
+    Align_initFields();
+    return Align$inherit_instance;
+  }
   var Align$unset_instance;
+  function Align$unset_getInstance() {
+    Align_initFields();
+    return Align$unset_instance;
+  }
   var Align$auto_instance;
+  function Align$auto_getInstance() {
+    Align_initFields();
+    return Align$auto_instance;
+  }
   var Align$stretch_instance;
+  function Align$stretch_getInstance() {
+    Align_initFields();
+    return Align$stretch_instance;
+  }
   var Align$center_instance;
+  function Align$center_getInstance() {
+    Align_initFields();
+    return Align$center_instance;
+  }
   var Align$flexStart_instance;
+  function Align$flexStart_getInstance() {
+    Align_initFields();
+    return Align$flexStart_instance;
+  }
   var Align$flexEnd_instance;
+  function Align$flexEnd_getInstance() {
+    Align_initFields();
+    return Align$flexEnd_instance;
+  }
   var Align$baseline_instance;
+  function Align$baseline_getInstance() {
+    Align_initFields();
+    return Align$baseline_instance;
+  }
+  Align.prototype.toString = function () {
+    return hyphenize(this.name);
+  };
+  Align.$metadata$ = {kind: Kind_CLASS, simpleName: 'Align', interfaces: [Enum]};
+  function Align$values() {
+    return [Align$initial_getInstance(), Align$inherit_getInstance(), Align$unset_getInstance(), Align$auto_getInstance(), Align$stretch_getInstance(), Align$center_getInstance(), Align$flexStart_getInstance(), Align$flexEnd_getInstance(), Align$baseline_getInstance()];
+  }
+  Align.values = Align$values;
+  function Align$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return Align$initial_getInstance();
+      case 'inherit':
+        return Align$inherit_getInstance();
+      case 'unset':
+        return Align$unset_getInstance();
+      case 'auto':
+        return Align$auto_getInstance();
+      case 'stretch':
+        return Align$stretch_getInstance();
+      case 'center':
+        return Align$center_getInstance();
+      case 'flexStart':
+        return Align$flexStart_getInstance();
+      case 'flexEnd':
+        return Align$flexEnd_getInstance();
+      case 'baseline':
+        return Align$baseline_getInstance();
+      default:throwISE('No enum constant kotlinx.css.Align.' + name);
+    }
+  }
+  Align.valueOf_61zpoe$ = Align$valueOf;
+  function JustifyContent(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function JustifyContent_initFields() {
+    JustifyContent_initFields = function () {
+    };
+    JustifyContent$initial_instance = new JustifyContent('initial', 0);
+    JustifyContent$inherit_instance = new JustifyContent('inherit', 1);
+    JustifyContent$unset_instance = new JustifyContent('unset', 2);
+    JustifyContent$center_instance = new JustifyContent('center', 3);
+    JustifyContent$start_instance = new JustifyContent('start', 4);
+    JustifyContent$end_instance = new JustifyContent('end', 5);
+    JustifyContent$flexStart_instance = new JustifyContent('flexStart', 6);
+    JustifyContent$flexEnd_instance = new JustifyContent('flexEnd', 7);
+    JustifyContent$left_instance = new JustifyContent('left', 8);
+    JustifyContent$right_instance = new JustifyContent('right', 9);
+    JustifyContent$baseline_instance = new JustifyContent('baseline', 10);
+    JustifyContent$firstBaseline_instance = new JustifyContent('firstBaseline', 11);
+    JustifyContent$lastBaseline_instance = new JustifyContent('lastBaseline', 12);
+    JustifyContent$spaceBetween_instance = new JustifyContent('spaceBetween', 13);
+    JustifyContent$spaceAround_instance = new JustifyContent('spaceAround', 14);
+    JustifyContent$spaceEvenly_instance = new JustifyContent('spaceEvenly', 15);
+    JustifyContent$stretch_instance = new JustifyContent('stretch', 16);
+    JustifyContent$safeCenter_instance = new JustifyContent('safeCenter', 17);
+    JustifyContent$unsafeCenter_instance = new JustifyContent('unsafeCenter', 18);
+  }
   var JustifyContent$initial_instance;
+  function JustifyContent$initial_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$initial_instance;
+  }
   var JustifyContent$inherit_instance;
+  function JustifyContent$inherit_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$inherit_instance;
+  }
   var JustifyContent$unset_instance;
+  function JustifyContent$unset_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$unset_instance;
+  }
   var JustifyContent$center_instance;
+  function JustifyContent$center_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$center_instance;
+  }
   var JustifyContent$start_instance;
+  function JustifyContent$start_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$start_instance;
+  }
   var JustifyContent$end_instance;
+  function JustifyContent$end_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$end_instance;
+  }
   var JustifyContent$flexStart_instance;
+  function JustifyContent$flexStart_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$flexStart_instance;
+  }
   var JustifyContent$flexEnd_instance;
+  function JustifyContent$flexEnd_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$flexEnd_instance;
+  }
   var JustifyContent$left_instance;
+  function JustifyContent$left_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$left_instance;
+  }
   var JustifyContent$right_instance;
+  function JustifyContent$right_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$right_instance;
+  }
   var JustifyContent$baseline_instance;
+  function JustifyContent$baseline_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$baseline_instance;
+  }
   var JustifyContent$firstBaseline_instance;
+  function JustifyContent$firstBaseline_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$firstBaseline_instance;
+  }
   var JustifyContent$lastBaseline_instance;
+  function JustifyContent$lastBaseline_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$lastBaseline_instance;
+  }
   var JustifyContent$spaceBetween_instance;
+  function JustifyContent$spaceBetween_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$spaceBetween_instance;
+  }
   var JustifyContent$spaceAround_instance;
+  function JustifyContent$spaceAround_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$spaceAround_instance;
+  }
   var JustifyContent$spaceEvenly_instance;
+  function JustifyContent$spaceEvenly_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$spaceEvenly_instance;
+  }
   var JustifyContent$stretch_instance;
+  function JustifyContent$stretch_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$stretch_instance;
+  }
   var JustifyContent$safeCenter_instance;
+  function JustifyContent$safeCenter_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$safeCenter_instance;
+  }
   var JustifyContent$unsafeCenter_instance;
+  function JustifyContent$unsafeCenter_getInstance() {
+    JustifyContent_initFields();
+    return JustifyContent$unsafeCenter_instance;
+  }
+  JustifyContent.prototype.toString = function () {
+    return hyphenize(this.name);
+  };
+  JustifyContent.$metadata$ = {kind: Kind_CLASS, simpleName: 'JustifyContent', interfaces: [Enum]};
+  function JustifyContent$values() {
+    return [JustifyContent$initial_getInstance(), JustifyContent$inherit_getInstance(), JustifyContent$unset_getInstance(), JustifyContent$center_getInstance(), JustifyContent$start_getInstance(), JustifyContent$end_getInstance(), JustifyContent$flexStart_getInstance(), JustifyContent$flexEnd_getInstance(), JustifyContent$left_getInstance(), JustifyContent$right_getInstance(), JustifyContent$baseline_getInstance(), JustifyContent$firstBaseline_getInstance(), JustifyContent$lastBaseline_getInstance(), JustifyContent$spaceBetween_getInstance(), JustifyContent$spaceAround_getInstance(), JustifyContent$spaceEvenly_getInstance(), JustifyContent$stretch_getInstance(), JustifyContent$safeCenter_getInstance(), JustifyContent$unsafeCenter_getInstance()];
+  }
+  JustifyContent.values = JustifyContent$values;
+  function JustifyContent$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return JustifyContent$initial_getInstance();
+      case 'inherit':
+        return JustifyContent$inherit_getInstance();
+      case 'unset':
+        return JustifyContent$unset_getInstance();
+      case 'center':
+        return JustifyContent$center_getInstance();
+      case 'start':
+        return JustifyContent$start_getInstance();
+      case 'end':
+        return JustifyContent$end_getInstance();
+      case 'flexStart':
+        return JustifyContent$flexStart_getInstance();
+      case 'flexEnd':
+        return JustifyContent$flexEnd_getInstance();
+      case 'left':
+        return JustifyContent$left_getInstance();
+      case 'right':
+        return JustifyContent$right_getInstance();
+      case 'baseline':
+        return JustifyContent$baseline_getInstance();
+      case 'firstBaseline':
+        return JustifyContent$firstBaseline_getInstance();
+      case 'lastBaseline':
+        return JustifyContent$lastBaseline_getInstance();
+      case 'spaceBetween':
+        return JustifyContent$spaceBetween_getInstance();
+      case 'spaceAround':
+        return JustifyContent$spaceAround_getInstance();
+      case 'spaceEvenly':
+        return JustifyContent$spaceEvenly_getInstance();
+      case 'stretch':
+        return JustifyContent$stretch_getInstance();
+      case 'safeCenter':
+        return JustifyContent$safeCenter_getInstance();
+      case 'unsafeCenter':
+        return JustifyContent$unsafeCenter_getInstance();
+      default:throwISE('No enum constant kotlinx.css.JustifyContent.' + name);
+    }
+  }
+  JustifyContent.valueOf_61zpoe$ = JustifyContent$valueOf;
   var BackgroundRepeat$initial_instance;
   var BackgroundRepeat$inherit_instance;
   var BackgroundRepeat$unset_instance;
@@ -599,13 +856,85 @@
   var BorderCollapse$unset_instance;
   var BorderCollapse$separate_instance;
   var BorderCollapse$collapse_instance;
+  function BorderStyle(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function BorderStyle_initFields() {
+    BorderStyle_initFields = function () {
+    };
+    BorderStyle$initial_instance = new BorderStyle('initial', 0);
+    BorderStyle$inherit_instance = new BorderStyle('inherit', 1);
+    BorderStyle$unset_instance = new BorderStyle('unset', 2);
+    BorderStyle$none_instance = new BorderStyle('none', 3);
+    BorderStyle$dotted_instance = new BorderStyle('dotted', 4);
+    BorderStyle$dashed_instance = new BorderStyle('dashed', 5);
+    BorderStyle$solid_instance = new BorderStyle('solid', 6);
+  }
   var BorderStyle$initial_instance;
+  function BorderStyle$initial_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$initial_instance;
+  }
   var BorderStyle$inherit_instance;
+  function BorderStyle$inherit_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$inherit_instance;
+  }
   var BorderStyle$unset_instance;
+  function BorderStyle$unset_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$unset_instance;
+  }
   var BorderStyle$none_instance;
+  function BorderStyle$none_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$none_instance;
+  }
   var BorderStyle$dotted_instance;
+  function BorderStyle$dotted_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$dotted_instance;
+  }
   var BorderStyle$dashed_instance;
+  function BorderStyle$dashed_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$dashed_instance;
+  }
   var BorderStyle$solid_instance;
+  function BorderStyle$solid_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$solid_instance;
+  }
+  BorderStyle.prototype.toString = function () {
+    return this.name;
+  };
+  BorderStyle.$metadata$ = {kind: Kind_CLASS, simpleName: 'BorderStyle', interfaces: [Enum]};
+  function BorderStyle$values() {
+    return [BorderStyle$initial_getInstance(), BorderStyle$inherit_getInstance(), BorderStyle$unset_getInstance(), BorderStyle$none_getInstance(), BorderStyle$dotted_getInstance(), BorderStyle$dashed_getInstance(), BorderStyle$solid_getInstance()];
+  }
+  BorderStyle.values = BorderStyle$values;
+  function BorderStyle$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return BorderStyle$initial_getInstance();
+      case 'inherit':
+        return BorderStyle$inherit_getInstance();
+      case 'unset':
+        return BorderStyle$unset_getInstance();
+      case 'none':
+        return BorderStyle$none_getInstance();
+      case 'dotted':
+        return BorderStyle$dotted_getInstance();
+      case 'dashed':
+        return BorderStyle$dashed_getInstance();
+      case 'solid':
+        return BorderStyle$solid_getInstance();
+      default:throwISE('No enum constant kotlinx.css.BorderStyle.' + name);
+    }
+  }
+  BorderStyle.valueOf_61zpoe$ = BorderStyle$valueOf;
   var BoxSizing$initial_instance;
   var BoxSizing$inherit_instance;
   var BoxSizing$unset_instance;
@@ -1431,15 +1760,121 @@
   var Float$left_instance;
   var Float$right_instance;
   var Float$none_instance;
+  function FontWeight(value) {
+    FontWeight$Companion_getInstance();
+    CssValue.call(this, value);
+    this.value_sy9x9q$_0 = value;
+  }
+  Object.defineProperty(FontWeight.prototype, 'value', {get: function () {
+    return this.value_sy9x9q$_0;
+  }});
+  function FontWeight$Companion() {
+    FontWeight$Companion_instance = this;
+    this.initial = new FontWeight('initial');
+    this.inherit = new FontWeight('inherit');
+    this.unset = new FontWeight('unset');
+    this.normal = new FontWeight('normal');
+    this.bold = new FontWeight('bold');
+    this.bolder = new FontWeight('bolder');
+    this.lighter = new FontWeight('lighter');
+    this.w900 = new FontWeight('900');
+    this.w800 = new FontWeight('800');
+    this.w700 = new FontWeight('700');
+    this.w600 = new FontWeight('600');
+    this.w500 = new FontWeight('500');
+    this.w400 = new FontWeight('400');
+    this.w300 = new FontWeight('300');
+    this.w200 = new FontWeight('200');
+    this.w100 = new FontWeight('100');
+  }
+  FontWeight$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var FontWeight$Companion_instance = null;
+  function FontWeight$Companion_getInstance() {
+    if (FontWeight$Companion_instance === null) {
+      new FontWeight$Companion();
+    }return FontWeight$Companion_instance;
+  }
+  FontWeight.$metadata$ = {kind: Kind_CLASS, simpleName: 'FontWeight', interfaces: [CssValue]};
   var FontStyle$Companion_instance = null;
+  function FlexDirection(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function FlexDirection_initFields() {
+    FlexDirection_initFields = function () {
+    };
+    FlexDirection$initial_instance = new FlexDirection('initial', 0);
+    FlexDirection$inherit_instance = new FlexDirection('inherit', 1);
+    FlexDirection$unset_instance = new FlexDirection('unset', 2);
+    FlexDirection$column_instance = new FlexDirection('column', 3);
+    FlexDirection$columnReverse_instance = new FlexDirection('columnReverse', 4);
+    FlexDirection$row_instance = new FlexDirection('row', 5);
+    FlexDirection$rowReverse_instance = new FlexDirection('rowReverse', 6);
+  }
   var FlexDirection$initial_instance;
+  function FlexDirection$initial_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$initial_instance;
+  }
   var FlexDirection$inherit_instance;
+  function FlexDirection$inherit_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$inherit_instance;
+  }
   var FlexDirection$unset_instance;
+  function FlexDirection$unset_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$unset_instance;
+  }
   var FlexDirection$column_instance;
+  function FlexDirection$column_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$column_instance;
+  }
   var FlexDirection$columnReverse_instance;
+  function FlexDirection$columnReverse_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$columnReverse_instance;
+  }
   var FlexDirection$row_instance;
+  function FlexDirection$row_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$row_instance;
+  }
   var FlexDirection$rowReverse_instance;
+  function FlexDirection$rowReverse_getInstance() {
+    FlexDirection_initFields();
+    return FlexDirection$rowReverse_instance;
+  }
+  FlexDirection.prototype.toString = function () {
+    return hyphenize(this.name);
+  };
+  FlexDirection.$metadata$ = {kind: Kind_CLASS, simpleName: 'FlexDirection', interfaces: [Enum]};
+  function FlexDirection$values() {
+    return [FlexDirection$initial_getInstance(), FlexDirection$inherit_getInstance(), FlexDirection$unset_getInstance(), FlexDirection$column_getInstance(), FlexDirection$columnReverse_getInstance(), FlexDirection$row_getInstance(), FlexDirection$rowReverse_getInstance()];
+  }
+  FlexDirection.values = FlexDirection$values;
+  function FlexDirection$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return FlexDirection$initial_getInstance();
+      case 'inherit':
+        return FlexDirection$inherit_getInstance();
+      case 'unset':
+        return FlexDirection$unset_getInstance();
+      case 'column':
+        return FlexDirection$column_getInstance();
+      case 'columnReverse':
+        return FlexDirection$columnReverse_getInstance();
+      case 'row':
+        return FlexDirection$row_getInstance();
+      case 'rowReverse':
+        return FlexDirection$rowReverse_getInstance();
+      default:throwISE('No enum constant kotlinx.css.FlexDirection.' + name);
+    }
+  }
+  FlexDirection.valueOf_61zpoe$ = FlexDirection$valueOf;
   var Gap$Companion_instance = null;
   var GridAutoColumns$Companion_instance = null;
   var GridAutoFlow$Companion_instance = null;
@@ -1467,33 +1902,263 @@
   var Hyphens$none_instance;
   var Hyphens$manual_instance;
   var Hyphens$auto_instance;
+  function ListStyleType(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function ListStyleType_initFields() {
+    ListStyleType_initFields = function () {
+    };
+    ListStyleType$initial_instance = new ListStyleType('initial', 0);
+    ListStyleType$inherit_instance = new ListStyleType('inherit', 1);
+    ListStyleType$unset_instance = new ListStyleType('unset', 2);
+    ListStyleType$none_instance = new ListStyleType('none', 3);
+    ListStyleType$disc_instance = new ListStyleType('disc', 4);
+    ListStyleType$circle_instance = new ListStyleType('circle', 5);
+    ListStyleType$square_instance = new ListStyleType('square', 6);
+    ListStyleType$decimal_instance = new ListStyleType('decimal', 7);
+  }
   var ListStyleType$initial_instance;
+  function ListStyleType$initial_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$initial_instance;
+  }
   var ListStyleType$inherit_instance;
+  function ListStyleType$inherit_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$inherit_instance;
+  }
   var ListStyleType$unset_instance;
+  function ListStyleType$unset_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$unset_instance;
+  }
   var ListStyleType$none_instance;
+  function ListStyleType$none_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$none_instance;
+  }
   var ListStyleType$disc_instance;
+  function ListStyleType$disc_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$disc_instance;
+  }
   var ListStyleType$circle_instance;
+  function ListStyleType$circle_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$circle_instance;
+  }
   var ListStyleType$square_instance;
+  function ListStyleType$square_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$square_instance;
+  }
   var ListStyleType$decimal_instance;
+  function ListStyleType$decimal_getInstance() {
+    ListStyleType_initFields();
+    return ListStyleType$decimal_instance;
+  }
+  ListStyleType.prototype.toString = function () {
+    return hyphenize(this.name);
+  };
+  ListStyleType.$metadata$ = {kind: Kind_CLASS, simpleName: 'ListStyleType', interfaces: [Enum]};
+  function ListStyleType$values() {
+    return [ListStyleType$initial_getInstance(), ListStyleType$inherit_getInstance(), ListStyleType$unset_getInstance(), ListStyleType$none_getInstance(), ListStyleType$disc_getInstance(), ListStyleType$circle_getInstance(), ListStyleType$square_getInstance(), ListStyleType$decimal_getInstance()];
+  }
+  ListStyleType.values = ListStyleType$values;
+  function ListStyleType$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return ListStyleType$initial_getInstance();
+      case 'inherit':
+        return ListStyleType$inherit_getInstance();
+      case 'unset':
+        return ListStyleType$unset_getInstance();
+      case 'none':
+        return ListStyleType$none_getInstance();
+      case 'disc':
+        return ListStyleType$disc_getInstance();
+      case 'circle':
+        return ListStyleType$circle_getInstance();
+      case 'square':
+        return ListStyleType$square_getInstance();
+      case 'decimal':
+        return ListStyleType$decimal_getInstance();
+      default:throwISE('No enum constant kotlinx.css.ListStyleType.' + name);
+    }
+  }
+  ListStyleType.valueOf_61zpoe$ = ListStyleType$valueOf;
+  function ObjectFit(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function ObjectFit_initFields() {
+    ObjectFit_initFields = function () {
+    };
+    ObjectFit$initial_instance = new ObjectFit('initial', 0);
+    ObjectFit$inherit_instance = new ObjectFit('inherit', 1);
+    ObjectFit$unset_instance = new ObjectFit('unset', 2);
+    ObjectFit$contain_instance = new ObjectFit('contain', 3);
+    ObjectFit$cover_instance = new ObjectFit('cover', 4);
+    ObjectFit$fill_instance = new ObjectFit('fill', 5);
+    ObjectFit$none_instance = new ObjectFit('none', 6);
+    ObjectFit$scaleDown_instance = new ObjectFit('scaleDown', 7);
+  }
   var ObjectFit$initial_instance;
+  function ObjectFit$initial_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$initial_instance;
+  }
   var ObjectFit$inherit_instance;
+  function ObjectFit$inherit_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$inherit_instance;
+  }
   var ObjectFit$unset_instance;
+  function ObjectFit$unset_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$unset_instance;
+  }
   var ObjectFit$contain_instance;
+  function ObjectFit$contain_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$contain_instance;
+  }
   var ObjectFit$cover_instance;
+  function ObjectFit$cover_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$cover_instance;
+  }
   var ObjectFit$fill_instance;
+  function ObjectFit$fill_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$fill_instance;
+  }
   var ObjectFit$none_instance;
+  function ObjectFit$none_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$none_instance;
+  }
   var ObjectFit$scaleDown_instance;
+  function ObjectFit$scaleDown_getInstance() {
+    ObjectFit_initFields();
+    return ObjectFit$scaleDown_instance;
+  }
+  ObjectFit.prototype.toString = function () {
+    return hyphenize(this.name);
+  };
+  ObjectFit.$metadata$ = {kind: Kind_CLASS, simpleName: 'ObjectFit', interfaces: [Enum]};
+  function ObjectFit$values() {
+    return [ObjectFit$initial_getInstance(), ObjectFit$inherit_getInstance(), ObjectFit$unset_getInstance(), ObjectFit$contain_getInstance(), ObjectFit$cover_getInstance(), ObjectFit$fill_getInstance(), ObjectFit$none_getInstance(), ObjectFit$scaleDown_getInstance()];
+  }
+  ObjectFit.values = ObjectFit$values;
+  function ObjectFit$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return ObjectFit$initial_getInstance();
+      case 'inherit':
+        return ObjectFit$inherit_getInstance();
+      case 'unset':
+        return ObjectFit$unset_getInstance();
+      case 'contain':
+        return ObjectFit$contain_getInstance();
+      case 'cover':
+        return ObjectFit$cover_getInstance();
+      case 'fill':
+        return ObjectFit$fill_getInstance();
+      case 'none':
+        return ObjectFit$none_getInstance();
+      case 'scaleDown':
+        return ObjectFit$scaleDown_getInstance();
+      default:throwISE('No enum constant kotlinx.css.ObjectFit.' + name);
+    }
+  }
+  ObjectFit.valueOf_61zpoe$ = ObjectFit$valueOf;
   var Outline$initial_instance;
   var Outline$inherit_instance;
   var Outline$unset_instance;
   var Outline$none_instance;
+  function Overflow(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function Overflow_initFields() {
+    Overflow_initFields = function () {
+    };
+    Overflow$initial_instance = new Overflow('initial', 0);
+    Overflow$inherit_instance = new Overflow('inherit', 1);
+    Overflow$unset_instance = new Overflow('unset', 2);
+    Overflow$visible_instance = new Overflow('visible', 3);
+    Overflow$hidden_instance = new Overflow('hidden', 4);
+    Overflow$scroll_instance = new Overflow('scroll', 5);
+    Overflow$auto_instance = new Overflow('auto', 6);
+  }
   var Overflow$initial_instance;
+  function Overflow$initial_getInstance() {
+    Overflow_initFields();
+    return Overflow$initial_instance;
+  }
   var Overflow$inherit_instance;
+  function Overflow$inherit_getInstance() {
+    Overflow_initFields();
+    return Overflow$inherit_instance;
+  }
   var Overflow$unset_instance;
+  function Overflow$unset_getInstance() {
+    Overflow_initFields();
+    return Overflow$unset_instance;
+  }
   var Overflow$visible_instance;
+  function Overflow$visible_getInstance() {
+    Overflow_initFields();
+    return Overflow$visible_instance;
+  }
   var Overflow$hidden_instance;
+  function Overflow$hidden_getInstance() {
+    Overflow_initFields();
+    return Overflow$hidden_instance;
+  }
   var Overflow$scroll_instance;
+  function Overflow$scroll_getInstance() {
+    Overflow_initFields();
+    return Overflow$scroll_instance;
+  }
   var Overflow$auto_instance;
+  function Overflow$auto_getInstance() {
+    Overflow_initFields();
+    return Overflow$auto_instance;
+  }
+  Overflow.prototype.toString = function () {
+    return this.name;
+  };
+  Overflow.$metadata$ = {kind: Kind_CLASS, simpleName: 'Overflow', interfaces: [Enum]};
+  function Overflow$values() {
+    return [Overflow$initial_getInstance(), Overflow$inherit_getInstance(), Overflow$unset_getInstance(), Overflow$visible_getInstance(), Overflow$hidden_getInstance(), Overflow$scroll_getInstance(), Overflow$auto_getInstance()];
+  }
+  Overflow.values = Overflow$values;
+  function Overflow$valueOf(name) {
+    switch (name) {
+      case 'initial':
+        return Overflow$initial_getInstance();
+      case 'inherit':
+        return Overflow$inherit_getInstance();
+      case 'unset':
+        return Overflow$unset_getInstance();
+      case 'visible':
+        return Overflow$visible_getInstance();
+      case 'hidden':
+        return Overflow$hidden_getInstance();
+      case 'scroll':
+        return Overflow$scroll_getInstance();
+      case 'auto':
+        return Overflow$auto_getInstance();
+      default:throwISE('No enum constant kotlinx.css.Overflow.' + name);
+    }
+  }
+  Overflow.valueOf_61zpoe$ = Overflow$valueOf;
   var OverflowWrap$initial_instance;
   var OverflowWrap$inherit_instance;
   var OverflowWrap$unset_instance;
@@ -1510,210 +2175,31 @@
   var PointerEvents$unset_instance;
   var PointerEvents$auto_instance;
   var PointerEvents$none_instance;
-  function Position(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function Position_initFields() {
-    Position_initFields = function () {
-    };
-    Position$initial_instance = new Position('initial', 0);
-    Position$inherit_instance = new Position('inherit', 1);
-    Position$unset_instance = new Position('unset', 2);
-    Position$static_instance = new Position('static', 3);
-    Position$relative_instance = new Position('relative', 4);
-    Position$absolute_instance = new Position('absolute', 5);
-    Position$fixed_instance = new Position('fixed', 6);
-    Position$sticky_instance = new Position('sticky', 7);
-  }
   var Position$initial_instance;
-  function Position$initial_getInstance() {
-    Position_initFields();
-    return Position$initial_instance;
-  }
   var Position$inherit_instance;
-  function Position$inherit_getInstance() {
-    Position_initFields();
-    return Position$inherit_instance;
-  }
   var Position$unset_instance;
-  function Position$unset_getInstance() {
-    Position_initFields();
-    return Position$unset_instance;
-  }
   var Position$static_instance;
-  function Position$static_getInstance() {
-    Position_initFields();
-    return Position$static_instance;
-  }
   var Position$relative_instance;
-  function Position$relative_getInstance() {
-    Position_initFields();
-    return Position$relative_instance;
-  }
   var Position$absolute_instance;
-  function Position$absolute_getInstance() {
-    Position_initFields();
-    return Position$absolute_instance;
-  }
   var Position$fixed_instance;
-  function Position$fixed_getInstance() {
-    Position_initFields();
-    return Position$fixed_instance;
-  }
   var Position$sticky_instance;
-  function Position$sticky_getInstance() {
-    Position_initFields();
-    return Position$sticky_instance;
-  }
-  Position.prototype.toString = function () {
-    return this.name;
-  };
-  Position.$metadata$ = {kind: Kind_CLASS, simpleName: 'Position', interfaces: [Enum]};
-  function Position$values() {
-    return [Position$initial_getInstance(), Position$inherit_getInstance(), Position$unset_getInstance(), Position$static_getInstance(), Position$relative_getInstance(), Position$absolute_getInstance(), Position$fixed_getInstance(), Position$sticky_getInstance()];
-  }
-  Position.values = Position$values;
-  function Position$valueOf(name) {
-    switch (name) {
-      case 'initial':
-        return Position$initial_getInstance();
-      case 'inherit':
-        return Position$inherit_getInstance();
-      case 'unset':
-        return Position$unset_getInstance();
-      case 'static':
-        return Position$static_getInstance();
-      case 'relative':
-        return Position$relative_getInstance();
-      case 'absolute':
-        return Position$absolute_getInstance();
-      case 'fixed':
-        return Position$fixed_getInstance();
-      case 'sticky':
-        return Position$sticky_getInstance();
-      default:throwISE('No enum constant kotlinx.css.Position.' + name);
-    }
-  }
-  Position.valueOf_61zpoe$ = Position$valueOf;
   var RowGap$Companion_instance = null;
   var ScrollBehavior$initial_instance;
   var ScrollBehavior$inherit_instance;
   var ScrollBehavior$unset_instance;
   var ScrollBehavior$auto_instance;
   var ScrollBehavior$smooth_instance;
-  function TextAlign(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function TextAlign_initFields() {
-    TextAlign_initFields = function () {
-    };
-    TextAlign$initial_instance = new TextAlign('initial', 0);
-    TextAlign$inherit_instance = new TextAlign('inherit', 1);
-    TextAlign$unset_instance = new TextAlign('unset', 2);
-    TextAlign$left_instance = new TextAlign('left', 3);
-    TextAlign$right_instance = new TextAlign('right', 4);
-    TextAlign$center_instance = new TextAlign('center', 5);
-    TextAlign$justify_instance = new TextAlign('justify', 6);
-    TextAlign$justifyAll_instance = new TextAlign('justifyAll', 7);
-    TextAlign$start_instance = new TextAlign('start', 8);
-    TextAlign$end_instance = new TextAlign('end', 9);
-    TextAlign$matchParent_instance = new TextAlign('matchParent', 10);
-  }
   var TextAlign$initial_instance;
-  function TextAlign$initial_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$initial_instance;
-  }
   var TextAlign$inherit_instance;
-  function TextAlign$inherit_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$inherit_instance;
-  }
   var TextAlign$unset_instance;
-  function TextAlign$unset_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$unset_instance;
-  }
   var TextAlign$left_instance;
-  function TextAlign$left_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$left_instance;
-  }
   var TextAlign$right_instance;
-  function TextAlign$right_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$right_instance;
-  }
   var TextAlign$center_instance;
-  function TextAlign$center_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$center_instance;
-  }
   var TextAlign$justify_instance;
-  function TextAlign$justify_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$justify_instance;
-  }
   var TextAlign$justifyAll_instance;
-  function TextAlign$justifyAll_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$justifyAll_instance;
-  }
   var TextAlign$start_instance;
-  function TextAlign$start_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$start_instance;
-  }
   var TextAlign$end_instance;
-  function TextAlign$end_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$end_instance;
-  }
   var TextAlign$matchParent_instance;
-  function TextAlign$matchParent_getInstance() {
-    TextAlign_initFields();
-    return TextAlign$matchParent_instance;
-  }
-  TextAlign.prototype.toString = function () {
-    return hyphenize(this.name);
-  };
-  TextAlign.$metadata$ = {kind: Kind_CLASS, simpleName: 'TextAlign', interfaces: [Enum]};
-  function TextAlign$values() {
-    return [TextAlign$initial_getInstance(), TextAlign$inherit_getInstance(), TextAlign$unset_getInstance(), TextAlign$left_getInstance(), TextAlign$right_getInstance(), TextAlign$center_getInstance(), TextAlign$justify_getInstance(), TextAlign$justifyAll_getInstance(), TextAlign$start_getInstance(), TextAlign$end_getInstance(), TextAlign$matchParent_getInstance()];
-  }
-  TextAlign.values = TextAlign$values;
-  function TextAlign$valueOf(name) {
-    switch (name) {
-      case 'initial':
-        return TextAlign$initial_getInstance();
-      case 'inherit':
-        return TextAlign$inherit_getInstance();
-      case 'unset':
-        return TextAlign$unset_getInstance();
-      case 'left':
-        return TextAlign$left_getInstance();
-      case 'right':
-        return TextAlign$right_getInstance();
-      case 'center':
-        return TextAlign$center_getInstance();
-      case 'justify':
-        return TextAlign$justify_getInstance();
-      case 'justifyAll':
-        return TextAlign$justifyAll_getInstance();
-      case 'start':
-        return TextAlign$start_getInstance();
-      case 'end':
-        return TextAlign$end_getInstance();
-      case 'matchParent':
-        return TextAlign$matchParent_getInstance();
-      default:throwISE('No enum constant kotlinx.css.TextAlign.' + name);
-    }
-  }
-  TextAlign.valueOf_61zpoe$ = TextAlign$valueOf;
   var TableLayout$initial_instance;
   var TableLayout$inherit_instance;
   var TableLayout$unset_instance;
@@ -1829,6 +2315,9 @@
   var alignContent_metadata = new PropertyMetadata('alignContent');
   var alignItems;
   var alignItems_metadata = new PropertyMetadata('alignItems');
+  function set_alignItems($receiver, alignItems_0) {
+    alignItems.setValue_6qj5c4$($receiver, alignItems_metadata, alignItems_0);
+  }
   var alignSelf;
   var alignSelf_metadata = new PropertyMetadata('alignSelf');
   function animation$lambda() {
@@ -1859,6 +2348,9 @@
   var backgroundSize_metadata = new PropertyMetadata('backgroundSize');
   var border;
   var border_metadata = new PropertyMetadata('border');
+  function set_border($receiver, border_0) {
+    border.setValue_6qj5c4$($receiver, border_metadata, border_0);
+  }
   var borderTop;
   var borderTop_metadata = new PropertyMetadata('borderTop');
   var borderRight;
@@ -1894,6 +2386,9 @@
   var borderLeftStyle_metadata = new PropertyMetadata('borderLeftStyle');
   var borderWidth;
   var borderWidth_metadata = new PropertyMetadata('borderWidth');
+  function set_borderWidth($receiver, borderWidth_0) {
+    borderWidth.setValue_6qj5c4$($receiver, borderWidth_metadata, borderWidth_0);
+  }
   var borderTopWidth;
   var borderTopWidth_metadata = new PropertyMetadata('borderTopWidth');
   var borderRightWidth;
@@ -1904,6 +2399,9 @@
   var borderLeftWidth_metadata = new PropertyMetadata('borderLeftWidth');
   var borderColor;
   var borderColor_metadata = new PropertyMetadata('borderColor');
+  function set_borderColor($receiver, borderColor_0) {
+    borderColor.setValue_6qj5c4$($receiver, borderColor_metadata, borderColor_0);
+  }
   var borderTopColor;
   var borderTopColor_metadata = new PropertyMetadata('borderTopColor');
   var borderRightColor;
@@ -1950,6 +2448,9 @@
   var filter_metadata = new PropertyMetadata('filter');
   var flexDirection;
   var flexDirection_metadata = new PropertyMetadata('flexDirection');
+  function set_flexDirection($receiver, flexDirection_0) {
+    flexDirection.setValue_6qj5c4$($receiver, flexDirection_metadata, flexDirection_0);
+  }
   var flexGrow;
   var flexGrow_metadata = new PropertyMetadata('flexGrow');
   var flexShrink;
@@ -1964,8 +2465,14 @@
   var fontFamily_metadata = new PropertyMetadata('fontFamily');
   var fontSize;
   var fontSize_metadata = new PropertyMetadata('fontSize');
+  function set_fontSize($receiver, fontSize_0) {
+    fontSize.setValue_6qj5c4$($receiver, fontSize_metadata, fontSize_0);
+  }
   var fontWeight;
   var fontWeight_metadata = new PropertyMetadata('fontWeight');
+  function set_fontWeight($receiver, fontWeight_0) {
+    fontWeight.setValue_6qj5c4$($receiver, fontWeight_metadata, fontWeight_0);
+  }
   var fontStyle;
   var fontStyle_metadata = new PropertyMetadata('fontStyle');
   var gap;
@@ -2004,10 +2511,16 @@
   var gridTemplateRows_metadata = new PropertyMetadata('gridTemplateRows');
   var height;
   var height_metadata = new PropertyMetadata('height');
+  function set_height($receiver, height_0) {
+    height.setValue_6qj5c4$($receiver, height_metadata, height_0);
+  }
   var hyphens;
   var hyphens_metadata = new PropertyMetadata('hyphens');
   var justifyContent;
   var justifyContent_metadata = new PropertyMetadata('justifyContent');
+  function set_justifyContent($receiver, justifyContent_0) {
+    justifyContent.setValue_6qj5c4$($receiver, justifyContent_metadata, justifyContent_0);
+  }
   var left;
   var left_metadata = new PropertyMetadata('left');
   var letterSpacing;
@@ -2016,16 +2529,34 @@
   var lineHeight_metadata = new PropertyMetadata('lineHeight');
   var listStyleType;
   var listStyleType_metadata = new PropertyMetadata('listStyleType');
+  function set_listStyleType($receiver, listStyleType_0) {
+    listStyleType.setValue_6qj5c4$($receiver, listStyleType_metadata, listStyleType_0);
+  }
   var margin;
   var margin_metadata = new PropertyMetadata('margin');
+  function set_margin($receiver, margin_0) {
+    margin.setValue_6qj5c4$($receiver, margin_metadata, margin_0);
+  }
   var marginTop;
   var marginTop_metadata = new PropertyMetadata('marginTop');
+  function set_marginTop($receiver, marginTop_0) {
+    marginTop.setValue_6qj5c4$($receiver, marginTop_metadata, marginTop_0);
+  }
   var marginRight;
   var marginRight_metadata = new PropertyMetadata('marginRight');
+  function set_marginRight($receiver, marginRight_0) {
+    marginRight.setValue_6qj5c4$($receiver, marginRight_metadata, marginRight_0);
+  }
   var marginBottom;
   var marginBottom_metadata = new PropertyMetadata('marginBottom');
+  function set_marginBottom($receiver, marginBottom_0) {
+    marginBottom.setValue_6qj5c4$($receiver, marginBottom_metadata, marginBottom_0);
+  }
   var marginLeft;
   var marginLeft_metadata = new PropertyMetadata('marginLeft');
+  function set_marginLeft($receiver, marginLeft_0) {
+    marginLeft.setValue_6qj5c4$($receiver, marginLeft_metadata, marginLeft_0);
+  }
   var minWidth;
   var minWidth_metadata = new PropertyMetadata('minWidth');
   var maxWidth;
@@ -2036,6 +2567,9 @@
   var maxHeight_metadata = new PropertyMetadata('maxHeight');
   var objectFit;
   var objectFit_metadata = new PropertyMetadata('objectFit');
+  function set_objectFit($receiver, objectFit_0) {
+    objectFit.setValue_6qj5c4$($receiver, objectFit_metadata, objectFit_0);
+  }
   var objectPosition;
   var objectPosition_metadata = new PropertyMetadata('objectPosition');
   var opacity;
@@ -2048,12 +2582,18 @@
   var overflowX_metadata = new PropertyMetadata('overflowX');
   var overflowY;
   var overflowY_metadata = new PropertyMetadata('overflowY');
+  function set_overflowY($receiver, overflowY_0) {
+    overflowY.setValue_6qj5c4$($receiver, overflowY_metadata, overflowY_0);
+  }
   var overflowWrap;
   var overflowWrap_metadata = new PropertyMetadata('overflowWrap');
   var overscrollBehavior;
   var overscrollBehavior_metadata = new PropertyMetadata('overscrollBehavior');
   var padding;
   var padding_metadata = new PropertyMetadata('padding');
+  function set_padding($receiver, padding_0) {
+    padding.setValue_6qj5c4$($receiver, padding_metadata, padding_0);
+  }
   var paddingTop;
   var paddingTop_metadata = new PropertyMetadata('paddingTop');
   function set_paddingTop($receiver, paddingTop_0) {
@@ -2078,23 +2618,14 @@
   var pointerEvents_metadata = new PropertyMetadata('pointerEvents');
   var position;
   var position_metadata = new PropertyMetadata('position');
-  function set_position($receiver, position_0) {
-    position.setValue_6qj5c4$($receiver, position_metadata, position_0);
-  }
   var right;
   var right_metadata = new PropertyMetadata('right');
-  function set_right($receiver, right_0) {
-    right.setValue_6qj5c4$($receiver, right_metadata, right_0);
-  }
   var rowGap;
   var rowGap_metadata = new PropertyMetadata('rowGap');
   var scrollBehavior;
   var scrollBehavior_metadata = new PropertyMetadata('scrollBehavior');
   var textAlign;
   var textAlign_metadata = new PropertyMetadata('textAlign');
-  function set_textAlign($receiver, textAlign_0) {
-    textAlign.setValue_6qj5c4$($receiver, textAlign_metadata, textAlign_0);
-  }
   var textDecoration;
   var textDecoration_metadata = new PropertyMetadata('textDecoration');
   var textOverflow;
@@ -2103,9 +2634,6 @@
   var textTransform_metadata = new PropertyMetadata('textTransform');
   var top;
   var top_metadata = new PropertyMetadata('top');
-  function set_top($receiver, top_0) {
-    top.setValue_6qj5c4$($receiver, top_metadata, top_0);
-  }
   function transform$lambda() {
     return new Transforms();
   }
@@ -2124,6 +2652,9 @@
   var whiteSpace_metadata = new PropertyMetadata('whiteSpace');
   var width;
   var width_metadata = new PropertyMetadata('width');
+  function set_width($receiver, width_0) {
+    width.setValue_6qj5c4$($receiver, width_metadata, width_0);
+  }
   var wordBreak;
   var wordBreak_metadata = new PropertyMetadata('wordBreak');
   var wordWrap;
@@ -2136,8 +2667,85 @@
   var borderCollapse_metadata = new PropertyMetadata('borderCollapse');
   var zIndex;
   var zIndex_metadata = new PropertyMetadata('zIndex');
+  function set_zIndex($receiver, zIndex_0) {
+    zIndex.setValue_6qj5c4$($receiver, zIndex_metadata, zIndex_0);
+  }
   var resize;
   var resize_metadata = new PropertyMetadata('resize');
+  function getShorthandValue(top, right, bottom, left) {
+    var tmp$;
+    if (equals(top, bottom) && equals(right, left)) {
+      if (equals(top, right)) {
+        tmp$ = toString(top);
+      } else {
+        tmp$ = toString(top) + ' ' + toString(right);
+      }
+    } else {
+      if (equals(right, left)) {
+        tmp$ = toString(top) + ' ' + toString(right) + ' ' + toString(bottom);
+      } else {
+        tmp$ = toString(top) + ' ' + toString(right) + ' ' + toString(bottom) + ' ' + toString(left);
+      }
+    }
+    return tmp$;
+  }
+  function margin_0($receiver, top, right, bottom, left) {
+    if (top === void 0)
+      top = null;
+    if (right === void 0)
+      right = null;
+    if (bottom === void 0)
+      bottom = null;
+    if (left === void 0)
+      left = null;
+    if (top != null && right != null && bottom != null && left != null) {
+      set_margin($receiver, getShorthandValue(top, right, bottom, left));
+    } else {
+      if (top != null) {
+        set_marginTop($receiver, top);
+      }if (right != null) {
+        set_marginRight($receiver, right);
+      }if (bottom != null) {
+        set_marginBottom($receiver, bottom);
+      }if (left != null) {
+        set_marginLeft($receiver, left);
+      }}
+  }
+  function margin_1($receiver, all) {
+    margin_0($receiver, all, all, all, all);
+  }
+  function padding_0($receiver, top, right, bottom, left) {
+    if (top === void 0)
+      top = null;
+    if (right === void 0)
+      right = null;
+    if (bottom === void 0)
+      bottom = null;
+    if (left === void 0)
+      left = null;
+    if (top != null && right != null && bottom != null && left != null) {
+      set_padding($receiver, getShorthandValue(top, right, bottom, left));
+    } else {
+      if (top != null) {
+        set_paddingTop($receiver, top);
+      }if (right != null) {
+        set_paddingRight($receiver, right);
+      }if (bottom != null) {
+        set_paddingBottom($receiver, bottom);
+      }if (left != null) {
+        set_paddingLeft($receiver, left);
+      }}
+  }
+  function padding_1($receiver, all) {
+    padding_0($receiver, all, all, all, all);
+  }
+  function padding_2($receiver, vertical, horizontal) {
+    if (vertical === void 0)
+      vertical = null;
+    if (horizontal === void 0)
+      horizontal = null;
+    padding_0($receiver, vertical, horizontal, vertical, horizontal);
+  }
   function TagSelector(tagName) {
     this.tagName = tagName;
   }
@@ -2375,6 +2983,13 @@
     }return Animations$Companion_instance;
   }
   Animations.$metadata$ = {kind: Kind_CLASS, simpleName: 'Animations', interfaces: [StyleList]};
+  function border_0($receiver, width, style, color, borderRadius) {
+    if (borderRadius === void 0)
+      borderRadius = null;
+    set_border($receiver, width.toString() + ' ' + style + ' ' + color);
+    if (borderRadius != null) {
+      set_borderRadius($receiver, borderRadius);
+    }}
   function BoxShadows() {
     BoxShadows$Companion_getInstance();
     StyleList.call(this, ', ');
@@ -2461,8 +3076,47 @@
   package$css.times_6ic1pp$ = times;
   Object.defineProperty(LinearDimension, 'Companion', {get: LinearDimension$Companion_getInstance});
   package$css.LinearDimension = LinearDimension;
+  package$css.get_pct_rcaex3$ = get_pct;
   package$css.get_px_rcaex3$ = get_px;
   package$css.CssValue = CssValue;
+  Object.defineProperty(Align, 'initial', {get: Align$initial_getInstance});
+  Object.defineProperty(Align, 'inherit', {get: Align$inherit_getInstance});
+  Object.defineProperty(Align, 'unset', {get: Align$unset_getInstance});
+  Object.defineProperty(Align, 'auto', {get: Align$auto_getInstance});
+  Object.defineProperty(Align, 'stretch', {get: Align$stretch_getInstance});
+  Object.defineProperty(Align, 'center', {get: Align$center_getInstance});
+  Object.defineProperty(Align, 'flexStart', {get: Align$flexStart_getInstance});
+  Object.defineProperty(Align, 'flexEnd', {get: Align$flexEnd_getInstance});
+  Object.defineProperty(Align, 'baseline', {get: Align$baseline_getInstance});
+  package$css.Align = Align;
+  Object.defineProperty(JustifyContent, 'initial', {get: JustifyContent$initial_getInstance});
+  Object.defineProperty(JustifyContent, 'inherit', {get: JustifyContent$inherit_getInstance});
+  Object.defineProperty(JustifyContent, 'unset', {get: JustifyContent$unset_getInstance});
+  Object.defineProperty(JustifyContent, 'center', {get: JustifyContent$center_getInstance});
+  Object.defineProperty(JustifyContent, 'start', {get: JustifyContent$start_getInstance});
+  Object.defineProperty(JustifyContent, 'end', {get: JustifyContent$end_getInstance});
+  Object.defineProperty(JustifyContent, 'flexStart', {get: JustifyContent$flexStart_getInstance});
+  Object.defineProperty(JustifyContent, 'flexEnd', {get: JustifyContent$flexEnd_getInstance});
+  Object.defineProperty(JustifyContent, 'left', {get: JustifyContent$left_getInstance});
+  Object.defineProperty(JustifyContent, 'right', {get: JustifyContent$right_getInstance});
+  Object.defineProperty(JustifyContent, 'baseline', {get: JustifyContent$baseline_getInstance});
+  Object.defineProperty(JustifyContent, 'firstBaseline', {get: JustifyContent$firstBaseline_getInstance});
+  Object.defineProperty(JustifyContent, 'lastBaseline', {get: JustifyContent$lastBaseline_getInstance});
+  Object.defineProperty(JustifyContent, 'spaceBetween', {get: JustifyContent$spaceBetween_getInstance});
+  Object.defineProperty(JustifyContent, 'spaceAround', {get: JustifyContent$spaceAround_getInstance});
+  Object.defineProperty(JustifyContent, 'spaceEvenly', {get: JustifyContent$spaceEvenly_getInstance});
+  Object.defineProperty(JustifyContent, 'stretch', {get: JustifyContent$stretch_getInstance});
+  Object.defineProperty(JustifyContent, 'safeCenter', {get: JustifyContent$safeCenter_getInstance});
+  Object.defineProperty(JustifyContent, 'unsafeCenter', {get: JustifyContent$unsafeCenter_getInstance});
+  package$css.JustifyContent = JustifyContent;
+  Object.defineProperty(BorderStyle, 'initial', {get: BorderStyle$initial_getInstance});
+  Object.defineProperty(BorderStyle, 'inherit', {get: BorderStyle$inherit_getInstance});
+  Object.defineProperty(BorderStyle, 'unset', {get: BorderStyle$unset_getInstance});
+  Object.defineProperty(BorderStyle, 'none', {get: BorderStyle$none_getInstance});
+  Object.defineProperty(BorderStyle, 'dotted', {get: BorderStyle$dotted_getInstance});
+  Object.defineProperty(BorderStyle, 'dashed', {get: BorderStyle$dashed_getInstance});
+  Object.defineProperty(BorderStyle, 'solid', {get: BorderStyle$solid_getInstance});
+  package$css.BorderStyle = BorderStyle;
   Object.defineProperty(Color, 'Companion', {get: Color$Companion_getInstance});
   Color.RGBA = Color$RGBA;
   Color.HSLA = Color$HSLA;
@@ -2501,46 +3155,83 @@
   Object.defineProperty(Display, 'inlineFlex', {get: Display$inlineFlex_getInstance});
   Object.defineProperty(Display, 'inlineGrid', {get: Display$inlineGrid_getInstance});
   package$css.Display = Display;
-  Object.defineProperty(Position, 'initial', {get: Position$initial_getInstance});
-  Object.defineProperty(Position, 'inherit', {get: Position$inherit_getInstance});
-  Object.defineProperty(Position, 'unset', {get: Position$unset_getInstance});
-  Object.defineProperty(Position, 'static', {get: Position$static_getInstance});
-  Object.defineProperty(Position, 'relative', {get: Position$relative_getInstance});
-  Object.defineProperty(Position, 'absolute', {get: Position$absolute_getInstance});
-  Object.defineProperty(Position, 'fixed', {get: Position$fixed_getInstance});
-  Object.defineProperty(Position, 'sticky', {get: Position$sticky_getInstance});
-  package$css.Position = Position;
-  Object.defineProperty(TextAlign, 'initial', {get: TextAlign$initial_getInstance});
-  Object.defineProperty(TextAlign, 'inherit', {get: TextAlign$inherit_getInstance});
-  Object.defineProperty(TextAlign, 'unset', {get: TextAlign$unset_getInstance});
-  Object.defineProperty(TextAlign, 'left', {get: TextAlign$left_getInstance});
-  Object.defineProperty(TextAlign, 'right', {get: TextAlign$right_getInstance});
-  Object.defineProperty(TextAlign, 'center', {get: TextAlign$center_getInstance});
-  Object.defineProperty(TextAlign, 'justify', {get: TextAlign$justify_getInstance});
-  Object.defineProperty(TextAlign, 'justifyAll', {get: TextAlign$justifyAll_getInstance});
-  Object.defineProperty(TextAlign, 'start', {get: TextAlign$start_getInstance});
-  Object.defineProperty(TextAlign, 'end', {get: TextAlign$end_getInstance});
-  Object.defineProperty(TextAlign, 'matchParent', {get: TextAlign$matchParent_getInstance});
-  package$css.TextAlign = TextAlign;
+  Object.defineProperty(FontWeight, 'Companion', {get: FontWeight$Companion_getInstance});
+  package$css.FontWeight = FontWeight;
+  Object.defineProperty(FlexDirection, 'initial', {get: FlexDirection$initial_getInstance});
+  Object.defineProperty(FlexDirection, 'inherit', {get: FlexDirection$inherit_getInstance});
+  Object.defineProperty(FlexDirection, 'unset', {get: FlexDirection$unset_getInstance});
+  Object.defineProperty(FlexDirection, 'column', {get: FlexDirection$column_getInstance});
+  Object.defineProperty(FlexDirection, 'columnReverse', {get: FlexDirection$columnReverse_getInstance});
+  Object.defineProperty(FlexDirection, 'row', {get: FlexDirection$row_getInstance});
+  Object.defineProperty(FlexDirection, 'rowReverse', {get: FlexDirection$rowReverse_getInstance});
+  package$css.FlexDirection = FlexDirection;
+  Object.defineProperty(ListStyleType, 'initial', {get: ListStyleType$initial_getInstance});
+  Object.defineProperty(ListStyleType, 'inherit', {get: ListStyleType$inherit_getInstance});
+  Object.defineProperty(ListStyleType, 'unset', {get: ListStyleType$unset_getInstance});
+  Object.defineProperty(ListStyleType, 'none', {get: ListStyleType$none_getInstance});
+  Object.defineProperty(ListStyleType, 'disc', {get: ListStyleType$disc_getInstance});
+  Object.defineProperty(ListStyleType, 'circle', {get: ListStyleType$circle_getInstance});
+  Object.defineProperty(ListStyleType, 'square', {get: ListStyleType$square_getInstance});
+  Object.defineProperty(ListStyleType, 'decimal', {get: ListStyleType$decimal_getInstance});
+  package$css.ListStyleType = ListStyleType;
+  Object.defineProperty(ObjectFit, 'initial', {get: ObjectFit$initial_getInstance});
+  Object.defineProperty(ObjectFit, 'inherit', {get: ObjectFit$inherit_getInstance});
+  Object.defineProperty(ObjectFit, 'unset', {get: ObjectFit$unset_getInstance});
+  Object.defineProperty(ObjectFit, 'contain', {get: ObjectFit$contain_getInstance});
+  Object.defineProperty(ObjectFit, 'cover', {get: ObjectFit$cover_getInstance});
+  Object.defineProperty(ObjectFit, 'fill', {get: ObjectFit$fill_getInstance});
+  Object.defineProperty(ObjectFit, 'none', {get: ObjectFit$none_getInstance});
+  Object.defineProperty(ObjectFit, 'scaleDown', {get: ObjectFit$scaleDown_getInstance});
+  package$css.ObjectFit = ObjectFit;
+  Object.defineProperty(Overflow, 'initial', {get: Overflow$initial_getInstance});
+  Object.defineProperty(Overflow, 'inherit', {get: Overflow$inherit_getInstance});
+  Object.defineProperty(Overflow, 'unset', {get: Overflow$unset_getInstance});
+  Object.defineProperty(Overflow, 'visible', {get: Overflow$visible_getInstance});
+  Object.defineProperty(Overflow, 'hidden', {get: Overflow$hidden_getInstance});
+  Object.defineProperty(Overflow, 'scroll', {get: Overflow$scroll_getInstance});
+  Object.defineProperty(Overflow, 'auto', {get: Overflow$auto_getInstance});
+  package$css.Overflow = Overflow;
   package$css.StyleList = StyleList;
   package$css.StyledElement = StyledElement;
+  package$css.set_alignItems_olgsez$ = set_alignItems;
   package$css.set_backgroundColor_ommczd$ = set_backgroundColor;
+  package$css.set_border_krvuuu$ = set_border;
   package$css.set_borderRadius_n8chyh$ = set_borderRadius;
+  package$css.set_borderWidth_n8chyh$ = set_borderWidth;
+  package$css.set_borderColor_ommczd$ = set_borderColor;
   package$css.set_color_ommczd$ = set_color;
   package$css.set_content_qf37ct$ = set_content;
   package$css.set_display_qidz4o$ = set_display;
+  package$css.set_flexDirection_c4dh0c$ = set_flexDirection;
+  package$css.set_fontSize_n8chyh$ = set_fontSize;
+  package$css.set_fontWeight_6wqc8f$ = set_fontWeight;
+  package$css.set_height_n8chyh$ = set_height;
+  package$css.set_justifyContent_gwpzrh$ = set_justifyContent;
+  package$css.set_listStyleType_pit7rx$ = set_listStyleType;
+  package$css.set_margin_krvuuu$ = set_margin;
+  package$css.set_marginTop_n8chyh$ = set_marginTop;
+  package$css.set_marginRight_n8chyh$ = set_marginRight;
+  package$css.set_marginBottom_n8chyh$ = set_marginBottom;
+  package$css.set_marginLeft_n8chyh$ = set_marginLeft;
+  package$css.set_objectFit_j2gnxk$ = set_objectFit;
+  package$css.set_overflowY_qhpm6s$ = set_overflowY;
+  package$css.set_padding_krvuuu$ = set_padding;
   package$css.set_paddingTop_n8chyh$ = set_paddingTop;
   package$css.set_paddingRight_n8chyh$ = set_paddingRight;
   package$css.set_paddingBottom_n8chyh$ = set_paddingBottom;
   package$css.set_paddingLeft_n8chyh$ = set_paddingLeft;
-  package$css.set_position_mvtmy5$ = set_position;
-  package$css.set_right_n8chyh$ = set_right;
-  package$css.set_textAlign_q2ys32$ = set_textAlign;
-  package$css.set_top_n8chyh$ = set_top;
+  package$css.set_width_n8chyh$ = set_width;
+  package$css.set_zIndex_a6g65m$ = set_zIndex;
+  package$css.margin_fjjo64$ = margin_0;
+  package$css.margin_9vmwvs$ = margin_1;
+  package$css.padding_fjjo64$ = padding_0;
+  package$css.padding_9vmwvs$ = padding_1;
+  package$css.padding_cx3uck$ = padding_2;
   package$css.TagSelector = TagSelector;
   var package$properties = package$css.properties || (package$css.properties = {});
   Object.defineProperty(Animations, 'Companion', {get: Animations$Companion_getInstance});
   package$properties.Animations = Animations;
+  package$properties.border_2hqznt$ = border_0;
   Object.defineProperty(BoxShadows, 'Companion', {get: BoxShadows$Companion_getInstance});
   package$properties.BoxShadows = BoxShadows;
   package$properties.KeyframesBuilder = KeyframesBuilder;

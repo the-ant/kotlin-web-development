@@ -1,4 +1,20 @@
-(function (_, Kotlin, $module$react, $module$kotlin_wrappers_kotlin_extensions_jsLegacy, $module$kotlinx_coroutines_core) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin', 'react', 'kotlin-wrappers-kotlin-extensions-jsLegacy', 'kotlinx-coroutines-core'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'), require('react'), require('kotlin-wrappers-kotlin-extensions-jsLegacy'), require('kotlinx-coroutines-core'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof react === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'react' was not found. Please, check whether 'react' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof this['kotlin-wrappers-kotlin-extensions-jsLegacy'] === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlin-wrappers-kotlin-extensions-jsLegacy' was not found. Please, check whether 'kotlin-wrappers-kotlin-extensions-jsLegacy' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-react-jsLegacy'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'kotlin-wrappers-kotlin-react-jsLegacy'.");
+    }root['kotlin-wrappers-kotlin-react-jsLegacy'] = factory(typeof this['kotlin-wrappers-kotlin-react-jsLegacy'] === 'undefined' ? {} : this['kotlin-wrappers-kotlin-react-jsLegacy'], kotlin, react, this['kotlin-wrappers-kotlin-extensions-jsLegacy'], this['kotlinx-coroutines-core']);
+  }
+}(this, function (_, Kotlin, $module$react, $module$kotlin_wrappers_kotlin_extensions_jsLegacy, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Unit = Kotlin.kotlin.Unit;
@@ -21,10 +37,10 @@
   var Throwable = Error;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
-  var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.launch_s496o7$;
   var Component = $module$react.Component;
   var Any = Object;
   var to = Kotlin.kotlin.to_ujzrz7$;
+  var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   RElementBuilder.prototype = Object.create(RBuilder.prototype);
   RElementBuilder.prototype.constructor = RElementBuilder;
   RComponent.prototype = Object.create(Component.prototype);
@@ -248,6 +264,6 @@
   package$react.RComponent_init_lqgejo$ = RComponent_init;
   package$react.RComponent = RComponent;
   return _;
-}(module.exports, require('kotlin'), require('react'), require('kotlin-wrappers-kotlin-extensions-jsLegacy'), require('kotlinx-coroutines-core')));
+}));
 
 //# sourceMappingURL=kotlin-wrappers-kotlin-react-jsLegacy.js.map

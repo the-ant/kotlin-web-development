@@ -1211,6 +1211,8 @@
     Random$Default.prototype.constructor = Random$Default;
     XorWowRandom.prototype = Object.create(Random.prototype);
     XorWowRandom.prototype.constructor = XorWowRandom;
+    iterator$ObjectLiteral.prototype = Object.create(CharIterator.prototype);
+    iterator$ObjectLiteral.prototype.constructor = iterator$ObjectLiteral;
     NotImplementedError.prototype = Object.create(Error_0.prototype);
     NotImplementedError.prototype.constructor = NotImplementedError;
     function contains($receiver, element) {
@@ -1357,31 +1359,6 @@
       }
       return max;
     }
-    function minus($receiver, element) {
-      var result = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
-      var removed = {v: false};
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element_0 = tmp$.next();
-        var predicate$result;
-        if (!removed.v && equals(element_0, element)) {
-          removed.v = true;
-          predicate$result = false;
-        } else {
-          predicate$result = true;
-        }
-        if (predicate$result)
-          result.add_11rb$(element_0);
-      }
-      return result;
-    }
-    function plus_0($receiver, element) {
-      var result = ArrayList_init_0($receiver.size + 1 | 0);
-      result.addAll_brywnq$($receiver);
-      result.add_11rb$(element);
-      return result;
-    }
     function joinTo_8($receiver, buffer, separator, prefix, postfix, limit, truncated, transform) {
       if (separator === void 0)
         separator = ', ';
@@ -1490,6 +1467,11 @@
     }
     function map_10($receiver, transform) {
       return new TransformingSequence($receiver, transform);
+    }
+    function first_22($receiver) {
+      if ($receiver.length === 0)
+        throw new NoSuchElementException('Char sequence is empty.');
+      return $receiver.charCodeAt(0);
     }
     var PI;
     var E;
@@ -6058,12 +6040,6 @@
     function Continuation() {
     }
     Continuation.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Continuation', interfaces: []};
-    function startCoroutine($receiver, completion) {
-      intercepted(createCoroutineUnintercepted($receiver, completion)).resumeWith_tl1gpc$(new Result(Unit_getInstance()));
-    }
-    function startCoroutine_0($receiver, receiver, completion) {
-      intercepted(createCoroutineUnintercepted_0($receiver, receiver, completion)).resumeWith_tl1gpc$(new Result(Unit_getInstance()));
-    }
     defineInlineFunction('kotlin.kotlin.coroutines.suspendCoroutine_922awp$', wrapFunction(function () {
       var intercepted = _.kotlin.coroutines.intrinsics.intercepted_f9mg25$;
       var SafeContinuation_init = _.kotlin.coroutines.SafeContinuation_init_wj8d80$;
@@ -6369,6 +6345,16 @@
     var RequireKotlinVersionKind$COMPILER_VERSION_instance;
     var RequireKotlinVersionKind$API_VERSION_instance;
     var Delegates_instance = null;
+    function ReadOnlyProperty(f) {
+      this.function$ = f;
+    }
+    ReadOnlyProperty.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+      return this.function$(thisRef, property);
+    };
+    ReadOnlyProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadOnlyProperty', interfaces: []};
+    function ReadWriteProperty() {
+    }
+    ReadWriteProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadWriteProperty', interfaces: [ReadOnlyProperty]};
     function Random() {
       Random$Default_getInstance();
     }
@@ -6814,6 +6800,23 @@
        while (false);
       return trimEnd$result.toString();
     }
+    function iterator$ObjectLiteral(this$iterator) {
+      this.this$iterator = this$iterator;
+      CharIterator.call(this);
+      this.index_0 = 0;
+    }
+    iterator$ObjectLiteral.prototype.nextChar = function () {
+      var tmp$, tmp$_0;
+      tmp$_0 = (tmp$ = this.index_0, this.index_0 = tmp$ + 1 | 0, tmp$);
+      return this.this$iterator.charCodeAt(tmp$_0);
+    };
+    iterator$ObjectLiteral.prototype.hasNext = function () {
+      return this.index_0 < this.this$iterator.length;
+    };
+    iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [CharIterator]};
+    function iterator_4($receiver) {
+      return new iterator$ObjectLiteral($receiver);
+    }
     function get_indices_13($receiver) {
       return new IntRange(0, $receiver.length - 1 | 0);
     }
@@ -7150,8 +7153,6 @@
     package$collections.Collection = Collection;
     package$collections.max_exjks8$ = max_11;
     package$collections.maxOrNull_exjks8$ = maxOrNull_11;
-    package$collections.minus_2ws7j4$ = minus;
-    package$collections.plus_qloxvw$ = plus_0;
     package$collections.joinTo_gcc71v$ = joinTo_8;
     package$collections.joinToString_fmv235$ = joinToString_8;
     package$collections.asSequence_7wnvza$ = asSequence_8;
@@ -7165,6 +7166,8 @@
     package$sequences.map_z5avom$ = map_10;
     var package$text = package$kotlin.text || (package$kotlin.text = {});
     package$text.get_lastIndex_gw00vp$ = get_lastIndex_13;
+    package$text.first_gw00vp$ = first_22;
+    package$text.iterator_gw00vp$ = iterator_4;
     package$text.get_indices_gw00vp$ = get_indices_13;
     package$text.StringBuilder_init = StringBuilder_init_1;
     var package$js = package$kotlin.js || (package$kotlin.js = {});
@@ -7406,8 +7409,6 @@
     package$collections.optimizeReadOnlySet_94kdbt$ = optimizeReadOnlySet;
     package$coroutines.Continuation = Continuation;
     package$kotlin.Result = Result;
-    package$coroutines.startCoroutine_x18nsh$ = startCoroutine;
-    package$coroutines.startCoroutine_3a617i$ = startCoroutine_0;
     package$intrinsics.get_COROUTINE_SUSPENDED = get_COROUTINE_SUSPENDED;
     Object.defineProperty(ContinuationInterceptor, 'Key', {get: ContinuationInterceptor$Key_getInstance});
     package$coroutines.ContinuationInterceptor = ContinuationInterceptor;
@@ -7423,6 +7424,9 @@
     Object.defineProperty(CoroutineSingletons, 'UNDECIDED', {get: CoroutineSingletons$UNDECIDED_getInstance});
     Object.defineProperty(CoroutineSingletons, 'RESUMED', {get: CoroutineSingletons$RESUMED_getInstance});
     package$intrinsics.CoroutineSingletons = CoroutineSingletons;
+    var package$properties = package$kotlin.properties || (package$kotlin.properties = {});
+    package$properties.ReadOnlyProperty = ReadOnlyProperty;
+    package$properties.ReadWriteProperty = ReadWriteProperty;
     Object.defineProperty(Random, 'Default', {get: Random$Default_getInstance});
     package$random.Random_za3lpa$ = Random_0;
     package$random.fastLog2_kcn2v3$ = fastLog2;

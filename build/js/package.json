@@ -1,8 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "packages/TodosWeb",
-    "packages/TodosWeb-test"
+    "packages/TodosWeb"
   ],
   "devDependencies": {},
   "dependencies": {},

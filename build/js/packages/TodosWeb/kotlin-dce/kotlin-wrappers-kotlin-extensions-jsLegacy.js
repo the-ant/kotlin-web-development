@@ -1,4 +1,14 @@
-(function (_, Kotlin) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'kotlin-wrappers-kotlin-extensions-jsLegacy'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'kotlin-wrappers-kotlin-extensions-jsLegacy'.");
+    }root['kotlin-wrappers-kotlin-extensions-jsLegacy'] = factory(typeof this['kotlin-wrappers-kotlin-extensions-jsLegacy'] === 'undefined' ? {} : this['kotlin-wrappers-kotlin-extensions-jsLegacy'], kotlin);
+  }
+}(this, function (_, Kotlin) {
   'use strict';
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
@@ -18,6 +28,6 @@
   package$js.invoke_z5wujd$ = invoke_3;
   package$js.invoke_9p99ed$ = invoke_5;
   return _;
-}(module.exports, require('kotlin')));
+}));
 
 //# sourceMappingURL=kotlin-wrappers-kotlin-extensions-jsLegacy.js.map

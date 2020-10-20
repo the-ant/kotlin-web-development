@@ -54,6 +54,7 @@
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var Array_0 = Array;
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var toString = Kotlin.toString;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
@@ -103,16 +104,24 @@
   TextAreaWrap.prototype.constructor = TextAreaWrap;
   ThScope.prototype = Object.create(Enum.prototype);
   ThScope.prototype.constructor = ThScope;
-  BUTTON.prototype = Object.create(HTMLTag.prototype);
-  BUTTON.prototype.constructor = BUTTON;
+  A.prototype = Object.create(HTMLTag.prototype);
+  A.prototype.constructor = A;
   DIV.prototype = Object.create(HTMLTag.prototype);
   DIV.prototype.constructor = DIV;
-  H1.prototype = Object.create(HTMLTag.prototype);
-  H1.prototype.constructor = H1;
   H3.prototype = Object.create(HTMLTag.prototype);
   H3.prototype.constructor = H3;
+  H4.prototype = Object.create(HTMLTag.prototype);
+  H4.prototype.constructor = H4;
+  IMG.prototype = Object.create(HTMLTag.prototype);
+  IMG.prototype.constructor = IMG;
+  LI.prototype = Object.create(HTMLTag.prototype);
+  LI.prototype.constructor = LI;
   P.prototype = Object.create(HTMLTag.prototype);
   P.prototype.constructor = P;
+  SPAN.prototype = Object.create(HTMLTag.prototype);
+  SPAN.prototype.constructor = SPAN;
+  UL.prototype = Object.create(HTMLTag.prototype);
+  UL.prototype.constructor = UL;
   function TagConsumer() {
   }
   TagConsumer.prototype.onTagError_cjwpn3$ = function (tag, exception) {
@@ -350,9 +359,6 @@
     }return tmp$;
   };
   EnumEncoder.$metadata$ = {kind: Kind_CLASS, simpleName: 'EnumEncoder', interfaces: [AttributeEncoder]};
-  function enumEncode($receiver) {
-    return $receiver.realValue;
-  }
   function EnumAttribute(values) {
     Attribute.call(this, new EnumEncoder(values));
     this.values = values;
@@ -1721,69 +1727,44 @@
   function FlowOrInteractiveOrPhrasingContent() {
   }
   FlowOrInteractiveOrPhrasingContent.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'FlowOrInteractiveOrPhrasingContent', interfaces: [Tag]};
-  function BUTTON(initialAttributes, consumer) {
-    HTMLTag.call(this, 'button', consumer, initialAttributes, null, true, false);
-    this.consumer_a8eqy4$_0 = consumer;
+  function A(initialAttributes, consumer) {
+    HTMLTag.call(this, 'a', consumer, initialAttributes, null, true, false);
+    this.consumer_615sxh$_0 = consumer;
   }
-  Object.defineProperty(BUTTON.prototype, 'consumer', {get: function () {
-    return this.consumer_a8eqy4$_0;
+  Object.defineProperty(A.prototype, 'consumer', {get: function () {
+    return this.consumer_615sxh$_0;
   }});
-  Object.defineProperty(BUTTON.prototype, 'autoFocus', {configurable: true, get: function () {
-    return attributeBooleanTicker.get_txhc1s$(this, 'autofocus');
+  Object.defineProperty(A.prototype, 'href', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'href');
   }, set: function (newValue) {
-    attributeBooleanTicker.set_fid0sb$(this, 'autofocus', newValue);
+    attributeStringString.set_fid0sb$(this, 'href', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'disabled', {configurable: true, get: function () {
-    return attributeBooleanTicker.get_txhc1s$(this, 'disabled');
+  Object.defineProperty(A.prototype, 'target', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'target');
   }, set: function (newValue) {
-    attributeBooleanTicker.set_fid0sb$(this, 'disabled', newValue);
+    attributeStringString.set_fid0sb$(this, 'target', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'form', {configurable: true, get: function () {
-    return attributeStringString.get_txhc1s$(this, 'form');
+  Object.defineProperty(A.prototype, 'ping', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'ping');
   }, set: function (newValue) {
-    attributeStringString.set_fid0sb$(this, 'form', newValue);
+    attributeStringString.set_fid0sb$(this, 'ping', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'formAction', {configurable: true, get: function () {
-    return attributeStringString.get_txhc1s$(this, 'formaction');
+  Object.defineProperty(A.prototype, 'rel', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'rel');
   }, set: function (newValue) {
-    attributeStringString.set_fid0sb$(this, 'formaction', newValue);
+    attributeStringString.set_fid0sb$(this, 'rel', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'formEncType', {configurable: true, get: function () {
-    return attributeButtonFormEncTypeEnumButtonFormEncTypeValues.get_txhc1s$(this, 'formenctype');
+  Object.defineProperty(A.prototype, 'hrefLang', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'hreflang');
   }, set: function (newValue) {
-    attributeButtonFormEncTypeEnumButtonFormEncTypeValues.set_fid0sb$(this, 'formenctype', newValue);
+    attributeStringString.set_fid0sb$(this, 'hreflang', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'formMethod', {configurable: true, get: function () {
-    return attributeButtonFormMethodEnumButtonFormMethodValues.get_txhc1s$(this, 'formmethod');
+  Object.defineProperty(A.prototype, 'type', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'type');
   }, set: function (newValue) {
-    attributeButtonFormMethodEnumButtonFormMethodValues.set_fid0sb$(this, 'formmethod', newValue);
+    attributeStringString.set_fid0sb$(this, 'type', newValue);
   }});
-  Object.defineProperty(BUTTON.prototype, 'formNovalidate', {configurable: true, get: function () {
-    return attributeBooleanTicker.get_txhc1s$(this, 'formnovalidate');
-  }, set: function (newValue) {
-    attributeBooleanTicker.set_fid0sb$(this, 'formnovalidate', newValue);
-  }});
-  Object.defineProperty(BUTTON.prototype, 'formTarget', {configurable: true, get: function () {
-    return attributeStringString.get_txhc1s$(this, 'formtarget');
-  }, set: function (newValue) {
-    attributeStringString.set_fid0sb$(this, 'formtarget', newValue);
-  }});
-  Object.defineProperty(BUTTON.prototype, 'name', {configurable: true, get: function () {
-    return attributeStringString.get_txhc1s$(this, 'name');
-  }, set: function (newValue) {
-    attributeStringString.set_fid0sb$(this, 'name', newValue);
-  }});
-  Object.defineProperty(BUTTON.prototype, 'value', {configurable: true, get: function () {
-    return attributeStringString.get_txhc1s$(this, 'value');
-  }, set: function (newValue) {
-    attributeStringString.set_fid0sb$(this, 'value', newValue);
-  }});
-  Object.defineProperty(BUTTON.prototype, 'type', {configurable: true, get: function () {
-    return attributeButtonTypeEnumButtonTypeValues.get_txhc1s$(this, 'type');
-  }, set: function (newValue) {
-    attributeButtonTypeEnumButtonTypeValues.set_fid0sb$(this, 'type', newValue);
-  }});
-  BUTTON.$metadata$ = {kind: Kind_CLASS, simpleName: 'BUTTON', interfaces: [CommonAttributeGroupFacadeFlowInteractivePhrasingContent, HTMLTag]};
+  A.$metadata$ = {kind: Kind_CLASS, simpleName: 'A', interfaces: [CommonAttributeGroupFacadeFlowInteractivePhrasingContent, HTMLTag]};
   function DIV(initialAttributes, consumer) {
     HTMLTag.call(this, 'div', consumer, initialAttributes, null, false, false);
     this.consumer_q3hbv$_0 = consumer;
@@ -1792,14 +1773,6 @@
     return this.consumer_q3hbv$_0;
   }});
   DIV.$metadata$ = {kind: Kind_CLASS, simpleName: 'DIV', interfaces: [HtmlBlockTag, HTMLTag]};
-  function H1(initialAttributes, consumer) {
-    HTMLTag.call(this, 'h1', consumer, initialAttributes, null, false, false);
-    this.consumer_b9fkln$_0 = consumer;
-  }
-  Object.defineProperty(H1.prototype, 'consumer', {get: function () {
-    return this.consumer_b9fkln$_0;
-  }});
-  H1.$metadata$ = {kind: Kind_CLASS, simpleName: 'H1', interfaces: [CommonAttributeGroupFacadeFlowHeadingPhrasingContent, HTMLTag]};
   function H3(initialAttributes, consumer) {
     HTMLTag.call(this, 'h3', consumer, initialAttributes, null, false, false);
     this.consumer_mutthp$_0 = consumer;
@@ -1808,6 +1781,65 @@
     return this.consumer_mutthp$_0;
   }});
   H3.$metadata$ = {kind: Kind_CLASS, simpleName: 'H3', interfaces: [CommonAttributeGroupFacadeFlowHeadingPhrasingContent, HTMLTag]};
+  function H4(initialAttributes, consumer) {
+    HTMLTag.call(this, 'h4', consumer, initialAttributes, null, false, false);
+    this.consumer_6v131u$_0 = consumer;
+  }
+  Object.defineProperty(H4.prototype, 'consumer', {get: function () {
+    return this.consumer_6v131u$_0;
+  }});
+  H4.$metadata$ = {kind: Kind_CLASS, simpleName: 'H4', interfaces: [CommonAttributeGroupFacadeFlowHeadingPhrasingContent, HTMLTag]};
+  function IMG(initialAttributes, consumer) {
+    HTMLTag.call(this, 'img', consumer, initialAttributes, null, true, true);
+    this.consumer_4la90t$_0 = consumer;
+  }
+  Object.defineProperty(IMG.prototype, 'consumer', {get: function () {
+    return this.consumer_4la90t$_0;
+  }});
+  Object.defineProperty(IMG.prototype, 'alt', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'alt');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'alt', newValue);
+  }});
+  Object.defineProperty(IMG.prototype, 'src', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'src');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'src', newValue);
+  }});
+  Object.defineProperty(IMG.prototype, 'height', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'height');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'height', newValue);
+  }});
+  Object.defineProperty(IMG.prototype, 'width', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'width');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'width', newValue);
+  }});
+  Object.defineProperty(IMG.prototype, 'usemap', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'usemap');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'usemap', newValue);
+  }});
+  Object.defineProperty(IMG.prototype, 'ismap', {configurable: true, get: function () {
+    return attributeBooleanTicker.get_txhc1s$(this, 'ismap');
+  }, set: function (newValue) {
+    attributeBooleanTicker.set_fid0sb$(this, 'ismap', newValue);
+  }});
+  IMG.$metadata$ = {kind: Kind_CLASS, simpleName: 'IMG', interfaces: [CommonAttributeGroupFacadeFlowInteractivePhrasingContent, HTMLTag]};
+  function LI(initialAttributes, consumer) {
+    HTMLTag.call(this, 'li', consumer, initialAttributes, null, false, false);
+    this.consumer_gvd6sf$_0 = consumer;
+  }
+  Object.defineProperty(LI.prototype, 'consumer', {get: function () {
+    return this.consumer_gvd6sf$_0;
+  }});
+  Object.defineProperty(LI.prototype, 'value', {configurable: true, get: function () {
+    return attributeStringString.get_txhc1s$(this, 'value');
+  }, set: function (newValue) {
+    attributeStringString.set_fid0sb$(this, 'value', newValue);
+  }});
+  LI.$metadata$ = {kind: Kind_CLASS, simpleName: 'LI', interfaces: [HtmlBlockTag, HTMLTag]};
   function P(initialAttributes, consumer) {
     HTMLTag.call(this, 'p', consumer, initialAttributes, null, false, false);
     this.consumer_pmd17q$_0 = consumer;
@@ -1816,6 +1848,22 @@
     return this.consumer_pmd17q$_0;
   }});
   P.$metadata$ = {kind: Kind_CLASS, simpleName: 'P', interfaces: [HtmlBlockInlineTag, HTMLTag]};
+  function SPAN(initialAttributes, consumer) {
+    HTMLTag.call(this, 'span', consumer, initialAttributes, null, true, false);
+    this.consumer_7vq504$_0 = consumer;
+  }
+  Object.defineProperty(SPAN.prototype, 'consumer', {get: function () {
+    return this.consumer_7vq504$_0;
+  }});
+  SPAN.$metadata$ = {kind: Kind_CLASS, simpleName: 'SPAN', interfaces: [HtmlBlockInlineTag, HTMLTag]};
+  function UL(initialAttributes, consumer) {
+    HTMLTag.call(this, 'ul', consumer, initialAttributes, null, false, false);
+    this.consumer_hykqwp$_0 = consumer;
+  }
+  Object.defineProperty(UL.prototype, 'consumer', {get: function () {
+    return this.consumer_hykqwp$_0;
+  }});
+  UL.$metadata$ = {kind: Kind_CLASS, simpleName: 'UL', interfaces: [HtmlBlockTag, HTMLTag]};
   function HTMLTag(tagName, consumer, initialAttributes, namespace, inlineTag, emptyTag) {
     if (namespace === void 0)
       namespace = null;
@@ -1902,7 +1950,6 @@
   Object.defineProperty(package$attributes, 'TickerEncoder', {get: TickerEncoder_getInstance});
   package$attributes.TickerAttribute = TickerAttribute;
   package$attributes.EnumEncoder = EnumEncoder;
-  package$attributes.enumEncode_m4whry$ = enumEncode;
   package$attributes.EnumAttribute = EnumAttribute;
   package$attributes.stringSetDecode_pdl1vj$ = stringSetDecode;
   Object.defineProperty(package$attributes, 'StringSetEncoder', {get: StringSetEncoder_getInstance});
@@ -2031,11 +2078,15 @@
   package$html.FlowOrPhrasingOrMetaDataContent = FlowOrPhrasingOrMetaDataContent;
   package$html.SectioningOrFlowContent = SectioningOrFlowContent;
   package$html.FlowOrInteractiveOrPhrasingContent = FlowOrInteractiveOrPhrasingContent;
-  package$html.BUTTON = BUTTON;
+  package$html.A = A;
   package$html.DIV = DIV;
-  package$html.H1 = H1;
   package$html.H3 = H3;
+  package$html.H4 = H4;
+  package$html.IMG = IMG;
+  package$html.LI = LI;
   package$html.P = P;
+  package$html.SPAN = SPAN;
+  package$html.UL = UL;
   package$html.HTMLTag = HTMLTag;
   var package$stream = package$html.stream || (package$html.stream = {});
   package$stream.HTMLStreamBuilder = HTMLStreamBuilder;

@@ -41,8 +41,6 @@
   var RuntimeException = Kotlin.kotlin.RuntimeException;
   var CoroutineContext$Key = Kotlin.kotlin.coroutines.CoroutineContext.Key;
   var CoroutineContext$Element = Kotlin.kotlin.coroutines.CoroutineContext.Element;
-  var startCoroutine = Kotlin.kotlin.coroutines.startCoroutine_x18nsh$;
-  var startCoroutine_0 = Kotlin.kotlin.coroutines.startCoroutine_3a617i$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var L1 = Kotlin.Long.ONE;
@@ -102,10 +100,6 @@
   CompletionHandlerBase.prototype.constructor = CompletionHandlerBase;
   JobNode.prototype = Object.create(CompletionHandlerBase.prototype);
   JobNode.prototype.constructor = JobNode;
-  StandaloneCoroutine.prototype = Object.create(AbstractCoroutine.prototype);
-  StandaloneCoroutine.prototype.constructor = StandaloneCoroutine;
-  LazyStandaloneCoroutine.prototype = Object.create(StandaloneCoroutine.prototype);
-  LazyStandaloneCoroutine.prototype.constructor = LazyStandaloneCoroutine;
   ScopeCoroutine.prototype = Object.create(AbstractCoroutine.prototype);
   ScopeCoroutine.prototype.constructor = ScopeCoroutine;
   UndispatchedCoroutine.prototype = Object.create(ScopeCoroutine.prototype);
@@ -126,8 +120,6 @@
   CoroutineDispatcher$Key.prototype.constructor = CoroutineDispatcher$Key;
   CoroutineDispatcher.prototype = Object.create(AbstractCoroutineContextElement.prototype);
   CoroutineDispatcher.prototype.constructor = CoroutineDispatcher;
-  CoroutineStart.prototype = Object.create(Enum.prototype);
-  CoroutineStart.prototype.constructor = CoroutineStart;
   EventLoop.prototype = Object.create(CoroutineDispatcher.prototype);
   EventLoop.prototype.constructor = EventLoop;
   EventLoopImplPlatform.prototype = Object.create(EventLoop.prototype);
@@ -141,8 +133,6 @@
   JobSupport$ChildCompletion.prototype.constructor = JobSupport$ChildCompletion;
   JobSupport$AwaitContinuation.prototype = Object.create(CancellableContinuationImpl.prototype);
   JobSupport$AwaitContinuation.prototype.constructor = JobSupport$AwaitContinuation;
-  JobImpl.prototype = Object.create(JobSupport.prototype);
-  JobImpl.prototype.constructor = JobImpl;
   LinkedListHead.prototype = Object.create(LinkedListNode.prototype);
   LinkedListHead.prototype.constructor = LinkedListHead;
   NodeList.prototype = Object.create(LinkedListHead.prototype);
@@ -168,8 +158,6 @@
   MainCoroutineDispatcher.prototype = Object.create(CoroutineDispatcher.prototype);
   MainCoroutineDispatcher.prototype.constructor = MainCoroutineDispatcher;
   NonCancellable.prototype = Object.create(AbstractCoroutineContextElement.prototype);
-  SupervisorJobImpl.prototype = Object.create(JobImpl.prototype);
-  SupervisorJobImpl.prototype.constructor = SupervisorJobImpl;
   CancellationException.prototype = Object.create(IllegalStateException.prototype);
   CancellationException.prototype.constructor = CancellationException;
   TimeoutCancellationException.prototype = Object.create(CancellationException.prototype);
@@ -282,16 +270,6 @@
     start.invoke_3o0yor$(block, receiver, this);
   };
   AbstractCoroutine.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractCoroutine', interfaces: [CoroutineScope, Continuation, JobSupport, Job]};
-  function launch($receiver, context, start, block) {
-    if (context === void 0)
-      context = coroutines.EmptyCoroutineContext;
-    if (start === void 0)
-      start = CoroutineStart$DEFAULT_getInstance();
-    var newContext = newCoroutineContext($receiver, context);
-    var coroutine = start.isLazy ? new LazyStandaloneCoroutine(newContext, block) : new StandaloneCoroutine(newContext, true);
-    coroutine.start_b5ul0p$(start, coroutine, block);
-    return coroutine;
-  }
   function withContext$lambda(closure$context, closure$block) {
     return function (uCont) {
       var oldContext = uCont.context;
@@ -319,22 +297,6 @@
       return Kotlin.coroutineResult(Kotlin.coroutineReceiver());
     };
   }));
-  function StandaloneCoroutine(parentContext, active) {
-    AbstractCoroutine.call(this, parentContext, active);
-  }
-  StandaloneCoroutine.prototype.handleJobException_tcv7n7$ = function (exception) {
-    handleCoroutineException(this.context, exception);
-    return true;
-  };
-  StandaloneCoroutine.$metadata$ = {kind: Kind_CLASS, simpleName: 'StandaloneCoroutine', interfaces: [AbstractCoroutine]};
-  function LazyStandaloneCoroutine(parentContext, block) {
-    StandaloneCoroutine.call(this, parentContext, false);
-    this.continuation_0 = createCoroutineUnintercepted(block, this, this);
-  }
-  LazyStandaloneCoroutine.prototype.onStart = function () {
-    startCoroutineCancellable_1(this.continuation_0, this);
-  };
-  LazyStandaloneCoroutine.$metadata$ = {kind: Kind_CLASS, simpleName: 'LazyStandaloneCoroutine', interfaces: [StandaloneCoroutine]};
   function UndispatchedCoroutine(context, uCont) {
     ScopeCoroutine.call(this, context, uCont);
   }
@@ -961,7 +923,6 @@
   }
   function CompletableJob() {
   }
-  CompletableJob.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CompletableJob', interfaces: [Job]};
   function toState($receiver) {
     var tmp$, tmp$_0;
     var exception = $receiver.exceptionOrNull();
@@ -1101,102 +1062,14 @@
   function CoroutineScope() {
   }
   CoroutineScope.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CoroutineScope', interfaces: []};
-  function MainScope() {
-    return new ContextScope(SupervisorJob().plus_1fupul$(Dispatchers_getInstance().Main));
-  }
   var GlobalScope_instance = null;
   defineInlineFunction('kotlinx-coroutines-core.kotlinx.coroutines.currentCoroutineContext', function (continuation) {
     return Kotlin.coroutineReceiver().context;
   });
-  function CoroutineStart(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function CoroutineStart_initFields() {
-    CoroutineStart_initFields = function () {
-    };
-    CoroutineStart$DEFAULT_instance = new CoroutineStart('DEFAULT', 0);
-    CoroutineStart$LAZY_instance = new CoroutineStart('LAZY', 1);
-    CoroutineStart$ATOMIC_instance = new CoroutineStart('ATOMIC', 2);
-    CoroutineStart$UNDISPATCHED_instance = new CoroutineStart('UNDISPATCHED', 3);
-  }
   var CoroutineStart$DEFAULT_instance;
-  function CoroutineStart$DEFAULT_getInstance() {
-    CoroutineStart_initFields();
-    return CoroutineStart$DEFAULT_instance;
-  }
   var CoroutineStart$LAZY_instance;
-  function CoroutineStart$LAZY_getInstance() {
-    CoroutineStart_initFields();
-    return CoroutineStart$LAZY_instance;
-  }
   var CoroutineStart$ATOMIC_instance;
-  function CoroutineStart$ATOMIC_getInstance() {
-    CoroutineStart_initFields();
-    return CoroutineStart$ATOMIC_instance;
-  }
   var CoroutineStart$UNDISPATCHED_instance;
-  function CoroutineStart$UNDISPATCHED_getInstance() {
-    CoroutineStart_initFields();
-    return CoroutineStart$UNDISPATCHED_instance;
-  }
-  CoroutineStart.prototype.invoke_810yno$ = function (block, completion) {
-    switch (this.name) {
-      case 'DEFAULT':
-        startCoroutineCancellable(block, completion);
-        break;
-      case 'ATOMIC':
-        startCoroutine(block, completion);
-        break;
-      case 'UNDISPATCHED':
-        startCoroutineUndispatched(block, completion);
-        break;
-      case 'LAZY':
-        break;
-      default:Kotlin.noWhenBranchMatched();
-        break;
-    }
-  };
-  CoroutineStart.prototype.invoke_3o0yor$ = function (block, receiver, completion) {
-    switch (this.name) {
-      case 'DEFAULT':
-        startCoroutineCancellable_0(block, receiver, completion);
-        break;
-      case 'ATOMIC':
-        startCoroutine_0(block, receiver, completion);
-        break;
-      case 'UNDISPATCHED':
-        startCoroutineUndispatched_0(block, receiver, completion);
-        break;
-      case 'LAZY':
-        break;
-      default:Kotlin.noWhenBranchMatched();
-        break;
-    }
-  };
-  Object.defineProperty(CoroutineStart.prototype, 'isLazy', {configurable: true, get: function () {
-    return this === CoroutineStart$LAZY_getInstance();
-  }});
-  CoroutineStart.$metadata$ = {kind: Kind_CLASS, simpleName: 'CoroutineStart', interfaces: [Enum]};
-  function CoroutineStart$values() {
-    return [CoroutineStart$DEFAULT_getInstance(), CoroutineStart$LAZY_getInstance(), CoroutineStart$ATOMIC_getInstance(), CoroutineStart$UNDISPATCHED_getInstance()];
-  }
-  CoroutineStart.values = CoroutineStart$values;
-  function CoroutineStart$valueOf(name) {
-    switch (name) {
-      case 'DEFAULT':
-        return CoroutineStart$DEFAULT_getInstance();
-      case 'LAZY':
-        return CoroutineStart$LAZY_getInstance();
-      case 'ATOMIC':
-        return CoroutineStart$ATOMIC_getInstance();
-      case 'UNDISPATCHED':
-        return CoroutineStart$UNDISPATCHED_getInstance();
-      default:throwISE('No enum constant kotlinx.coroutines.CoroutineStart.' + name);
-    }
-  }
-  CoroutineStart.valueOf_61zpoe$ = CoroutineStart$valueOf;
   function CopyableThrowable() {
   }
   CopyableThrowable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CopyableThrowable', interfaces: []};
@@ -2618,39 +2491,6 @@
     return 'Empty{' + (this.isActive ? 'Active' : 'New') + '}';
   };
   Empty.$metadata$ = {kind: Kind_CLASS, simpleName: 'Empty', interfaces: [Incomplete]};
-  function JobImpl(parent) {
-    JobSupport.call(this, true);
-    this.initParentJobInternal_8vd9i7$(parent);
-    this.handlesException_fejgjb$_0 = this.handlesExceptionF();
-  }
-  Object.defineProperty(JobImpl.prototype, 'onCancelComplete', {configurable: true, get: function () {
-    return true;
-  }});
-  Object.defineProperty(JobImpl.prototype, 'handlesException', {configurable: true, get: function () {
-    return this.handlesException_fejgjb$_0;
-  }});
-  JobImpl.prototype.complete = function () {
-    return this.makeCompleting_8ea4ql$(Unit);
-  };
-  JobImpl.prototype.completeExceptionally_tcv7n7$ = function (exception) {
-    return this.makeCompleting_8ea4ql$(new CompletedExceptionally(exception));
-  };
-  JobImpl.prototype.handlesExceptionF = function () {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
-    tmp$_1 = (tmp$_0 = Kotlin.isType(tmp$ = this.parentHandle_8be2vx$, ChildHandleNode) ? tmp$ : null) != null ? tmp$_0.job : null;
-    if (tmp$_1 == null) {
-      return false;
-    }var parentJob = tmp$_1;
-    while (true) {
-      if (parentJob.handlesException)
-        return true;
-      tmp$_4 = (tmp$_3 = Kotlin.isType(tmp$_2 = parentJob.parentHandle_8be2vx$, ChildHandleNode) ? tmp$_2 : null) != null ? tmp$_3.job : null;
-      if (tmp$_4 == null) {
-        return false;
-      }parentJob = tmp$_4;
-    }
-  };
-  JobImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'JobImpl', interfaces: [CompletableJob, JobSupport]};
   function Incomplete() {
   }
   Incomplete.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Incomplete', interfaces: []};
@@ -2862,18 +2702,6 @@
     AbstractCoroutineContextElement.call(this, Job$Key_getInstance());
   }
   var NonCancellable_instance = null;
-  function SupervisorJob(parent) {
-    if (parent === void 0)
-      parent = null;
-    return new SupervisorJobImpl(parent);
-  }
-  function SupervisorJobImpl(parent) {
-    JobImpl.call(this, parent);
-  }
-  SupervisorJobImpl.prototype.childCancelled_tcv7n7$ = function (cause) {
-    return false;
-  };
-  SupervisorJobImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'SupervisorJobImpl', interfaces: [JobImpl]};
   function TimeoutCancellationException(message, coroutine) {
     CancellationException_init(message, this);
     this.coroutine_8be2vx$ = coroutine;
@@ -5427,16 +5255,6 @@
     this.uCont.resumeWith_tl1gpc$(recoverResult(state, this.uCont));
   };
   ScopeCoroutine.$metadata$ = {kind: Kind_CLASS, simpleName: 'ScopeCoroutine', interfaces: [CoroutineStackFrame, AbstractCoroutine]};
-  function ContextScope(context) {
-    this.coroutineContext_glfhxt$_0 = context;
-  }
-  Object.defineProperty(ContextScope.prototype, 'coroutineContext', {configurable: true, get: function () {
-    return this.coroutineContext_glfhxt$_0;
-  }});
-  ContextScope.prototype.toString = function () {
-    return 'CoroutineScope(coroutineContext=' + this.coroutineContext + ')';
-  };
-  ContextScope.$metadata$ = {kind: Kind_CLASS, simpleName: 'ContextScope', interfaces: [CoroutineScope]};
   function Symbol(symbol) {
     this.symbol = symbol;
   }
@@ -5500,16 +5318,6 @@
         throw e;
     }
   }
-  function startCoroutineCancellable_1($receiver, fatalCompletion) {
-    try {
-      resumeCancellableWith(intercepted($receiver), new Result(Unit));
-    } catch (e) {
-      if (Kotlin.isType(e, Throwable)) {
-        fatalCompletion.resumeWith_tl1gpc$(new Result(createFailure(e)));
-      } else
-        throw e;
-    }
-  }
   function startCoroutineUnintercepted($receiver, completion) {
     startDirect$break: do {
       var tmp$, tmp$_0;
@@ -5536,50 +5344,6 @@
       var tmp$, tmp$_0;
       var actualCompletion = completion;
       try {
-        tmp$ = $receiver(receiver, actualCompletion, false);
-      } catch (e) {
-        if (Kotlin.isType(e, Throwable)) {
-          var exception = e;
-          actualCompletion.resumeWith_tl1gpc$(new Result(createFailure(exception)));
-          break startDirect$break;
-        } else
-          throw e;
-      }
-      var value = tmp$;
-      if (value !== COROUTINE_SUSPENDED) {
-        var value_0 = (tmp$_0 = value) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
-        actualCompletion.resumeWith_tl1gpc$(new Result(value_0));
-      }}
-     while (false);
-  }
-  function startCoroutineUndispatched($receiver, completion) {
-    startDirect$break: do {
-      var tmp$, tmp$_0;
-      var actualCompletion = completion;
-      try {
-        completion.context;
-        tmp$ = $receiver(actualCompletion, false);
-      } catch (e) {
-        if (Kotlin.isType(e, Throwable)) {
-          var exception = e;
-          actualCompletion.resumeWith_tl1gpc$(new Result(createFailure(exception)));
-          break startDirect$break;
-        } else
-          throw e;
-      }
-      var value = tmp$;
-      if (value !== COROUTINE_SUSPENDED) {
-        var value_0 = (tmp$_0 = value) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
-        actualCompletion.resumeWith_tl1gpc$(new Result(value_0));
-      }}
-     while (false);
-  }
-  function startCoroutineUndispatched_0($receiver, receiver, completion) {
-    startDirect$break: do {
-      var tmp$, tmp$_0;
-      var actualCompletion = completion;
-      try {
-        completion.context;
         tmp$ = $receiver(receiver, actualCompletion, false);
       } catch (e) {
         if (Kotlin.isType(e, Throwable)) {
@@ -6269,10 +6033,6 @@
     var tmp$;
     return Kotlin.isType(tmp$ = Dispatchers_getInstance().Default, Delay) ? tmp$ : throwCCE();
   }
-  function newCoroutineContext($receiver, context) {
-    var combined = $receiver.coroutineContext.plus_1fupul$(context);
-    return combined !== Dispatchers_getInstance().Default && combined.get_j3r2sn$(ContinuationInterceptor.Key) == null ? combined.plus_1fupul$(Dispatchers_getInstance().Default) : combined;
-  }
   function toDebugString($receiver) {
     return $receiver.toString();
   }
@@ -6767,7 +6527,6 @@
   var package$kotlinx = _.kotlinx || (_.kotlinx = {});
   var package$coroutines = package$kotlinx.coroutines || (package$kotlinx.coroutines = {});
   package$coroutines.AbstractCoroutine = AbstractCoroutine;
-  package$coroutines.launch_s496o7$ = launch;
   package$coroutines.withContext_i5cbzn$ = withContext;
   package$coroutines.CancellableContinuation = CancellableContinuation;
   package$coroutines.getOrCreateCancellableContinuation_3j0xf1$ = getOrCreateCancellableContinuation;
@@ -6789,12 +6548,6 @@
   package$coroutines.CoroutineExceptionHandler = CoroutineExceptionHandler_0;
   Object.defineProperty(CoroutineExceptionHandler_0, 'Key', {get: CoroutineExceptionHandler$Key_getInstance});
   package$coroutines.CoroutineScope = CoroutineScope;
-  package$coroutines.MainScope = MainScope;
-  Object.defineProperty(CoroutineStart, 'DEFAULT', {get: CoroutineStart$DEFAULT_getInstance});
-  Object.defineProperty(CoroutineStart, 'LAZY', {get: CoroutineStart$LAZY_getInstance});
-  Object.defineProperty(CoroutineStart, 'ATOMIC', {get: CoroutineStart$ATOMIC_getInstance});
-  Object.defineProperty(CoroutineStart, 'UNDISPATCHED', {get: CoroutineStart$UNDISPATCHED_getInstance});
-  package$coroutines.CoroutineStart = CoroutineStart;
   package$coroutines.CopyableThrowable = CopyableThrowable;
   package$coroutines.Deferred = Deferred;
   package$coroutines.Delay = Delay;
@@ -6814,7 +6567,6 @@
   package$coroutines.JobSupport = JobSupport;
   package$coroutines.boxIncomplete_ntq51o$ = boxIncomplete;
   package$coroutines.unboxState_ntq51o$ = unboxState;
-  package$coroutines.JobImpl = JobImpl;
   package$coroutines.Incomplete = Incomplete;
   package$coroutines.JobNode = JobNode;
   package$coroutines.NodeList = NodeList;
@@ -6823,7 +6575,6 @@
   package$coroutines.ChildHandleNode = ChildHandleNode;
   package$coroutines.ChildContinuation = ChildContinuation;
   package$coroutines.MainCoroutineDispatcher = MainCoroutineDispatcher;
-  package$coroutines.SupervisorJob_5dx9e$ = SupervisorJob;
   package$coroutines.TimeoutCancellationException = TimeoutCancellationException;
   Object.defineProperty(package$coroutines, 'Unconfined', {get: Unconfined_getInstance});
   Object.defineProperty(YieldContext, 'Key', {get: YieldContext$Key_getInstance});
@@ -6848,18 +6599,14 @@
   package$coroutines.resume_yw0jex$ = resume;
   package$internal_0.recoverStackTrace_ak2v6d$ = recoverStackTrace;
   package$internal_0.ScopeCoroutine = ScopeCoroutine;
-  package$internal_0.ContextScope = ContextScope;
   package$internal_0.Symbol = Symbol;
   package$internal_0.systemProp_vrsuct$ = systemProp_0;
   package$internal_0.systemProp_ornks8$ = systemProp_1;
   var package$intrinsics = package$coroutines.intrinsics || (package$coroutines.intrinsics = {});
   package$intrinsics.startCoroutineCancellable_x18nsh$ = startCoroutineCancellable;
   package$intrinsics.startCoroutineCancellable_kew4v3$ = startCoroutineCancellable_0;
-  package$intrinsics.startCoroutineCancellable_he7xzw$ = startCoroutineCancellable_1;
   package$intrinsics.startCoroutineUnintercepted_81hn2s$ = startCoroutineUnintercepted;
   package$intrinsics.startCoroutineUnintercepted_kew4v3$ = startCoroutineUnintercepted_0;
-  package$intrinsics.startCoroutineUndispatched_81hn2s$ = startCoroutineUndispatched;
-  package$intrinsics.startCoroutineUndispatched_kew4v3$ = startCoroutineUndispatched_0;
   package$intrinsics.startUndispatchedOrReturn_nxbeil$ = startUndispatchedOrReturn;
   var package$selects = package$coroutines.selects || (package$coroutines.selects = {});
   package$selects.SelectBuilder = SelectBuilder;
@@ -6873,7 +6620,6 @@
   package$coroutines.invokeIt_beznmj$ = invokeIt;
   package$coroutines.createDefaultDispatcher_8be2vx$ = createDefaultDispatcher;
   Object.defineProperty(package$coroutines, 'DefaultDelay_8be2vx$', {get: get_DefaultDelay});
-  package$coroutines.newCoroutineContext_7n4184$ = newCoroutineContext;
   package$coroutines.toDebugString_u0ddlz$ = toDebugString;
   package$coroutines.get_coroutineName_tcgsej$ = get_coroutineName;
   package$coroutines.handleCoroutineExceptionImpl_yfv4gr$ = handleCoroutineExceptionImpl;

@@ -1,11 +1,11 @@
 package component
 
+import component.style.buttonStyle
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import model.Video
 import player.reactPlayer
 import react.*
-import react.dom.img
 import styled.css
 import styled.styledButton
 import styled.styledDiv
@@ -31,6 +31,10 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 position = Position.absolute
                 top = 10.px
                 right = 10.px
+                display = Display.flex
+                flexDirection = FlexDirection.column
+                alignItems = Align.center
+                justifyContent = JustifyContent.center
             }
             styledH3 {
                 css {
@@ -45,10 +49,18 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 }
                 +"${props.video.speaker}: ${props.video.title}"
             }
+            reactPlayer {
+                attrs{
+                    url = props.video.url
+                    playing = true
+                }
+            }
             styledButton {
                 css {
-                    display = Display.block
-                    backgroundColor = if (props.unwatchedVideo) Color.lightGreen else Color.red
+                    buttonStyle()
+                    fontSize = 20.px
+                    marginTop = 24.px
+                    backgroundColor = if (props.unwatchedVideo) Color("#04C45C") else Color("#2D3748")
                 }
                 attrs {
                     onClickFunction = {
@@ -60,9 +72,6 @@ class VideoPlayer : RComponent<VideoPlayerProps, RState>() {
                 } else {
                     +"Mark as unwatched"
                 }
-            }
-            reactPlayer {
-                attrs.url = props.video.url
             }
         }
     }

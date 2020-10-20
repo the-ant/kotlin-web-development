@@ -1,9 +1,12 @@
 package component
 
+import kotlinx.css.marginLeft
+import kotlinx.css.px
 import kotlinx.html.js.onClickFunction
 import model.Video
 import react.*
-import react.dom.p
+import styled.css
+import styled.styledP
 
 external interface VideoListProps: RProps {
     var videos: List<Video>
@@ -25,7 +28,10 @@ class VideoList : RComponent<VideoListProps, RState>() {
 
     override fun RBuilder.render() {
         for (video in props.videos) {
-            p {
+            styledP {
+                css {
+                    marginLeft = 16.px
+                }
                 key = video.id.toString()
                 attrs {
                     onClickFunction = {
@@ -33,7 +39,7 @@ class VideoList : RComponent<VideoListProps, RState>() {
                     }
                 }
                 if (props.selectedVideo?.id == video.id) {
-                    +"▶ "
+                    +"☞ "
                 }
                 +"${video.speaker}: ${video.title}"
             }
