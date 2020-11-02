@@ -1,5 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.js") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
 }
 
 group = "org.example"
@@ -35,6 +36,11 @@ dependencies {
 
     //Coroutines (chapter 8)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    implementation("io.ktor:ktor-client-core:1.4.1")
+    implementation("io.ktor:ktor-client-auth:1.4.1")
+    implementation("io.ktor:ktor-client-json:1.4.1")
 }
 
 kotlin {

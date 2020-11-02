@@ -6,14 +6,6 @@ import kotlinx.css.properties.border
 import model.Video
 import player.reactPlayer
 import react.*
-import react.dom.a
-import react.dom.h3
-import react.dom.li
-import react.dom.ul
-import react.router.dom.hashRouter
-import react.router.dom.route
-import react.router.dom.routeLink
-import react.router.dom.switch
 import styled.*
 
 val videoList = listOf(
@@ -44,9 +36,11 @@ val videoList = listOf(
 
 
 external interface AppState : RState {
+    var isLoading: Boolean
     var currentVideo: Video?
     var videos: List<Video>
 }
+
 
 class App : RComponent<RProps, AppState>() {
 
@@ -55,13 +49,6 @@ class App : RComponent<RProps, AppState>() {
         if (currentVideo == null && videos.isNotEmpty()) {
             currentVideo = videoList[0]
         }
-    }
-
-    private fun List<Video>.randomVideo(): Video? {
-        if (isEmpty()) return null
-        val nextIndex = (0 until size).random()
-        console.log("next index: $nextIndex")
-        return this[nextIndex]
     }
 
     override fun RBuilder.render() {
@@ -79,88 +66,6 @@ class App : RComponent<RProps, AppState>() {
         }
     }
 
-    private fun RBuilder.renderContents() {
-        styledDiv {
-            css {
-                rowItemsStyle()
-                width = 100.pct
-                height = 100.pct
-            }
-            renderVideoPlayer()
-            renderListVideo()
-        }
-    }
-
-    private fun RBuilder.renderVideoPlayer() {
-        styledDiv {
-            css {
-                width = 75.pct
-                height = 100.pct
-                backgroundColor = Color.black
-            }
-            state.currentVideo?.let { video ->
-                console.log("currentVideo: $video")
-                reactPlayer {
-                    attrs {
-                        url = video.url
-                        width = 100.pct
-                        height = 100.pct
-                        controls = true
-                        playing = true
-                        stopOnUnmount = false
-                        onEnded = {
-                            setState {
-                                val currentIndex = videos.indexOf(video)
-                                console.log("reactPlayer - onEnded: $currentIndex")
-                                if (currentIndex != -1 && currentIndex + 1 < videos.size) {
-                                    currentVideo = videos[currentIndex + 1]
-                                } else if (videos.isNotEmpty()) {
-                                    currentVideo = videos[0]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun RBuilder.renderListVideo() {
-        styledDiv {
-            css {
-                width = 25.pct
-                height = 100.pct
-                overflowY = Overflow.auto
-                listStyleType = ListStyleType.none
-                backgroundColor = Color("#181818")
-                border(1.px, BorderStyle.solid, Color("#313131"))
-            }
-            for (item in state.videos) {
-                styledLi {
-                    key = item.id.toString()
-                    videoItem {
-                        video = item
-                        isSelected = item.id == state.currentVideo?.id
-                        onSelected = {
-                            setState {
-                                if (currentVideo?.id != video.id) {
-                                    currentVideo = video
-                                }
-                            }
-                        }
-                    }
-                    styledDiv {
-                        css {
-                            width = 100.pct
-                            height = 1.px
-                            backgroundColor = Color("#313131")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private fun RBuilder.renderAppBar() {
         styledDiv {
             css {
@@ -172,13 +77,13 @@ class App : RComponent<RProps, AppState>() {
             }
             styledDiv {
                 rowItemsWithCenterVerticalStyle()
-                styledImg("Menu", "/images/ic_menu.svg") {
-                    css {
-                        width = 24.px
-                        height = 24.px
-                        marginLeft = 25.px
-                    }
-                }
+//                styledImg("Menu", "/images/ic_menu.svg") {
+//                    css {
+//                        width = 24.px
+//                        height = 24.px
+//                        marginLeft = 25.px
+//                    }
+//                }
                 styledImg("Youtube", "/images/ic_youtube.svg") {
                     css {
                         width = 25.px
@@ -260,50 +165,82 @@ class App : RComponent<RProps, AppState>() {
         }
     }
 
-    private fun RBuilder.routing() {
-        hashRouter {
-            styledDiv {
-                css {
-                    display = Display.flex
-                    alignItems = Align.center
-                    justifyContent = JustifyContent.center
-                    backgroundColor = Color.white
-                    height = 100.pct
-                    width = 100.pct
+    private fun RBuilder.renderContents() {
+        styledDiv {
+            css {
+                rowItemsStyle()
+                width = 100.pct
+                height = 100.pct
+            }
+            renderVideoPlayer()
+            renderListVideo()
+        }
+    }
+
+    private fun RBuilder.renderVideoPlayer() {
+        styledDiv {
+            css {
+                width = 75.pct
+                height = 100.pct
+                backgroundColor = Color.black
+            }
+            state.currentVideo?.let { video ->
+                console.log("currentVideo: $video")
+                reactPlayer {
+                    attrs {
+                        url = video.url
+                        width = 100.pct
+                        height = 100.pct
+                        controls = true
+                        playing = true
+                        stopOnUnmount = false
+                        onEnded = {
+                            setState {
+                                val currentIndex = videos.indexOf(video)
+                                console.log("reactPlayer - onEnded: $currentIndex")
+                                if (currentIndex != -1 && currentIndex + 1 < videos.size) {
+                                    currentVideo = videos[currentIndex + 1]
+                                } else if (videos.isNotEmpty()) {
+                                    currentVideo = videos[0]
+                                }
+                            }
+                        }
+                    }
                 }
-                ul {
-                    li {
-                        routeLink("/") { +"Home" }
-                    }
-                    li {
-                        routeLink("/login") { +"login" }
-                    }
-                    li {
-                        routeLink("/register") { +"register" }
-                    }
-                }
-                switch {
-                    route("/", strict = true) {
-                        a(href = "#/") {
-                            +"Back"
+            }
+        }
+    }
+
+    private fun RBuilder.renderListVideo() {
+        styledDiv {
+            css {
+                width = 25.pct
+                height = 100.pct
+                overflowY = Overflow.auto
+                listStyleType = ListStyleType.none
+                backgroundColor = Color("#181818")
+                border(1.px, BorderStyle.solid, Color("#313131"))
+            }
+            for (item in state.videos) {
+                styledLi {
+                    key = item.id.toString()
+                    videoItem {
+                        video = item
+                        isSelected = item.id == state.currentVideo?.id
+                        onSelected = {
+                            setState {
+                                if (currentVideo?.id != video.id) {
+                                    currentVideo = video
+                                }
+                            }
                         }
-                        h3 { +"Home Page" }
                     }
-                    route("/login", strict = true) {
-//                        loginScreen {}
-//                        child(loginScreen {  }) {}
-                        a(href = "#/") {
-                            +"Back"
+                    styledDiv {
+                        css {
+                            width = 100.pct
+                            height = 1.px
+                            backgroundColor = Color("#313131")
                         }
-                        h3 { +"login" }
-                    }
-                    route("/register", strict = true) {
-//                        registerScreen {}
-//                        child(registerComponent) {}
-                        a(href = "#/") {
-                            +"Back"
-                        }
-                        h3 { +"register" }
                     }
                 }
             }
